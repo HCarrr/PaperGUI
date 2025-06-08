@@ -4,6 +4,7 @@
  */
 package paper.GUI;
 
+import javax.swing.JFrame;
 import paper.auth.User;
 
 /**
@@ -34,6 +35,7 @@ public class LoginGUI extends javax.swing.JPanel {
         jlogin = new javax.swing.JButton();
         jusername = new javax.swing.JTextField();
         jPassword = new javax.swing.JPasswordField();
+        jregis = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("LOGIN");
@@ -42,10 +44,17 @@ public class LoginGUI extends javax.swing.JPanel {
 
         jLabel3.setText("PASSWORD");
 
-        jlogin.setText("login sir");
+        jlogin.setText("login");
         jlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jloginActionPerformed(evt);
+            }
+        });
+
+        jregis.setText("register");
+        jregis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jregisActionPerformed(evt);
             }
         });
 
@@ -69,8 +78,13 @@ public class LoginGUI extends javax.swing.JPanel {
                 .addContainerGap(110, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(135, 135, 135))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(135, 135, 135))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jregis)
+                        .addGap(123, 123, 123))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +101,9 @@ public class LoginGUI extends javax.swing.JPanel {
                     .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jlogin)
-                .addGap(96, 96, 96))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jregis)
+                .addGap(61, 61, 61))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -105,11 +121,28 @@ public class LoginGUI extends javax.swing.JPanel {
         User user = User.authenticate(username, password);
         if (user != null) {
             javax.swing.JOptionPane.showMessageDialog(this, "Login berhasil!\nSelamat datang, " + user.getUsername(), "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            // Tambahkan aksi setelah login sukses jika perlu
+            // Ganti panel ke Dashboard
+            java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+            if (window instanceof javax.swing.JFrame frame) {
+                JFrame jFrame = (JFrame) window;
+                frame.setContentPane(new Dashboard(user.getUsername()));
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+            }
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Login gagal! Username tidak ditemukan atau password salah.", "Gagal", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jloginActionPerformed
+
+    private void jregisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jregisActionPerformed
+        // Pindah ke UserGUI (form registrasi user)
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+        if (window instanceof javax.swing.JFrame frame) {
+            frame.setContentPane(new UserGUI());
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_jregisActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -118,6 +151,7 @@ public class LoginGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPassword;
     private javax.swing.JButton jlogin;
+    private javax.swing.JButton jregis;
     private javax.swing.JTextField jusername;
     // End of variables declaration//GEN-END:variables
 

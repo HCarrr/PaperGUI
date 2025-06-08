@@ -37,6 +37,7 @@ public class UserGUI extends javax.swing.JPanel {
         jemail = new javax.swing.JTextField();
         jpassword = new javax.swing.JPasswordField();
         jsubmit = new javax.swing.JButton();
+        jpunyaaakun = new javax.swing.JButton();
 
         setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
@@ -53,6 +54,13 @@ public class UserGUI extends javax.swing.JPanel {
         jsubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jsubmitActionPerformed(evt);
+            }
+        });
+
+        jpunyaaakun.setText("punya akun");
+        jpunyaaakun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jpunyaaakunActionPerformed(evt);
             }
         });
 
@@ -81,7 +89,9 @@ public class UserGUI extends javax.swing.JPanel {
                                 .addComponent(jLabel1))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addComponent(jsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jpunyaaakun)
+                            .addComponent(jsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,7 +115,9 @@ public class UserGUI extends javax.swing.JPanel {
                     .addComponent(jpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jpunyaaakun)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,6 +161,16 @@ public class UserGUI extends javax.swing.JPanel {
     }
 }//GEN-LAST:event_jsubmitActionPerformed
 
+    private void jpunyaaakunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpunyaaakunActionPerformed
+        // Ambil window utama (JFrame) dari panel ini
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+        if (window instanceof javax.swing.JFrame frame) {
+            frame.setContentPane(new LoginGUI());
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_jpunyaaakunActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -158,6 +180,7 @@ public class UserGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jemail;
     private javax.swing.JPasswordField jpassword;
+    private javax.swing.JButton jpunyaaakun;
     private javax.swing.JButton jsubmit;
     private javax.swing.JTextField jusername;
     // End of variables declaration//GEN-END:variables
