@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package paper;
+import paper.model.MitraForm;
+import paper.model.Mitra;
 import javax.swing.table.DefaultTableModel;
 /**
  *
