@@ -299,8 +299,6 @@ public class OrderPembelian extends javax.swing.JFrame {
         jLabel9.setText(String.format("%.2f", total));
     }
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        
-        
         String nama = tfNama.getText();
         String hargaStr = tfHargaBeli.getText();
         String jumlahStr = tfJumlah.getText();
@@ -358,7 +356,7 @@ public class OrderPembelian extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         tfIdOrder.setText("ORD" + System.currentTimeMillis()); // atau format custom
-        cbMitra.addItem("PT. Maju Mundur");
+        cbMitra.addItem("Huda");
         cbMitra.addItem("CV. Sinar Jaya");
         cbMitra.addItem("Toko Sumber Rezeki");
     }//GEN-LAST:event_formWindowOpened

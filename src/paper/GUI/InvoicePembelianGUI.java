@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import paper.model.InvoicePenjualan;
+import paper.model.InvoicePembelian;
 
 /**
  *
  * @author hudac
  */
-public class InvoicePenjualanGUI extends javax.swing.JFrame {
-    private ArrayList<InvoicePenjualan> listInvoicePenjualan = new ArrayList<>();
 
-    /**
-     * Creates new form InvoicePenjualanGUI
-     */
-    public InvoicePenjualanGUI() {
+public class InvoicePembelianGUI extends javax.swing.JFrame {
+    
+    private ArrayList<InvoicePembelian> listInvoice = new ArrayList<>();
+    
+    public InvoicePembelianGUI() {
         initComponents();
+        
     }
 
     /**
@@ -36,14 +36,14 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbOrderanPenjualan = new javax.swing.JComboBox<String>();
+        cbOrderan = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnTambah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbOrderanPenjualan = new javax.swing.JTable();
-        jDatePenjualan = new com.toedter.calendar.JDateChooser();
+        tbOrderan = new javax.swing.JTable();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -53,11 +53,11 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("INVOICE PENJUALAN");
+        jLabel1.setText("INVOICE PEMBELIAN");
 
         jLabel2.setText("Orderan");
 
-        cbOrderanPenjualan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih" }));
+        cbOrderan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih" }));
 
         jLabel3.setText("Jatuh Tempo");
 
@@ -82,7 +82,7 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
             }
         });
 
-        tbOrderanPenjualan.setModel(new javax.swing.table.DefaultTableModel(
+        tbOrderan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -90,15 +90,15 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
                 "Orderan", "Jatuh Tempo"
             }
         ));
-        tbOrderanPenjualan.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbOrderan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbOrderanPenjualanMouseClicked(evt);
+                tbOrderanMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbOrderanPenjualanMousePressed(evt);
+                tbOrderanMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbOrderanPenjualan);
+        jScrollPane1.setViewportView(tbOrderan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,9 +112,9 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(115, 115, 115)
                         .addComponent(btnUpdate)
-                        .addGap(101, 101, 101)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTambah))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,8 +122,8 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbOrderanPenjualan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDatePenjualan, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
+                            .addComponent(cbOrderan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
                 .addGap(245, 245, 245))
             .addGroup(layout.createSequentialGroup()
                 .addGap(350, 350, 350)
@@ -138,55 +138,88 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cbOrderanPenjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbOrderan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(jDatePenjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnUpdate)
                     .addComponent(btnTambah))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int selectedRow = tbOrderanPenjualan.getSelectedRow();
+    private void tbOrderanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOrderanMouseClicked
+        
+    }//GEN-LAST:event_tbOrderanMouseClicked
 
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih baris yang ingin dihapus!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+    private void tbOrderanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOrderanMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbOrderanMousePressed
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+//        String order = cbOrderan.getSelectedItem().toString();
+//        Date jatuhTempo = jDateChooser1.getDate();
+//
+//        if (order.equals("Pilih") || jatuhTempo == null) {
+//            javax.swing.JOptionPane.showMessageDialog(this, "Silakan pilih Orderan dan tanggal Jatuh Tempo.");
+//            return;
+//        }
+//
+//        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+//        DefaultTableModel model = (DefaultTableModel) tbOrderan.getModel();
+//        model.addRow(new Object[]{order, sdf.format(jatuhTempo)});
+//        
+//        JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+        
+        String order = cbOrderan.getSelectedItem().toString();
+        Date jatuhTempo = jDateChooser1.getDate();
+
+        if (order.equals("Pilih") || jatuhTempo == null) {
+            JOptionPane.showMessageDialog(this, "Silakan pilih Orderan dan tanggal Jatuh Tempo.");
             return;
         }
 
-        int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus data ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            DefaultTableModel model = (DefaultTableModel) tbOrderanPenjualan.getModel();
-            model.removeRow(selectedRow);
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+        
+        String idTransaksi = "INV" + (listInvoice.size() + 1);
+        Date tanggalTransaksi = new Date(); // hari ini
+        double total = 0.0; // kamu bisa ganti jika sudah ada nilai
+        String status = "Belum Lunas";
 
-            listInvoicePenjualan.remove(selectedRow);
+        // Buat objek Invoice
+        InvoicePembelian invoice = new InvoicePembelian(
+            idTransaksi, tanggalTransaksi, total, status, order, jatuhTempo
+        );
 
-            cbOrderanPenjualan.setSelectedIndex(0);
-            jDatePenjualan.setDate(null);
-            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
+        // Tambahkan ke ArrayList
+        listInvoice.add(invoice);
+
+        // Tambahkan ke tabel
+        DefaultTableModel model = (DefaultTableModel) tbOrderan.getModel();
+        model.addRow(new Object[]{order, sdf.format(jatuhTempo)});
+
+        JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        int selectedRow = tbOrderanPenjualan.getSelectedRow();
-
+        int selectedRow = tbOrderan.getSelectedRow();
+    
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Pilih baris yang ingin diupdate!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        String order = cbOrderanPenjualan.getSelectedItem().toString();
-        Date jatuhTempo = jDatePenjualan.getDate();
+        String order = cbOrderan.getSelectedItem().toString();
+        Date jatuhTempo = jDateChooser1.getDate();
 
         if (order.equals("Pilih") || jatuhTempo == null) {
             JOptionPane.showMessageDialog(this, "Silakan pilih Orderan dan tanggal Jatuh Tempo.");
@@ -195,61 +228,43 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
 
         // Update data di tabel
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
-        DefaultTableModel model = (DefaultTableModel) tbOrderanPenjualan.getModel();
+        DefaultTableModel model = (DefaultTableModel) tbOrderan.getModel();
         model.setValueAt(order, selectedRow, 0);
         model.setValueAt(sdf.format(jatuhTempo), selectedRow, 1);
 
         // Update data di arraylist (asumsinya urutan row dan list sama)
-        InvoicePenjualan invoice = listInvoicePenjualan.get(selectedRow);
+        InvoicePembelian invoice = listInvoice.get(selectedRow);
         invoice.setIdOrder(order);
         invoice.setJatuhTempo(jatuhTempo);
 
         JOptionPane.showMessageDialog(this, "Data berhasil diupdate!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        String order = cbOrderanPenjualan.getSelectedItem().toString();
-        Date jatuhTempo = jDatePenjualan.getDate();
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = tbOrderan.getSelectedRow();
 
-        if (order.equals("Pilih") || jatuhTempo == null) {
-            JOptionPane.showMessageDialog(this, "Silakan pilih Orderan dan tanggal Jatuh Tempo.");
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris yang ingin dihapus!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus data ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            DefaultTableModel model = (DefaultTableModel) tbOrderan.getModel();
+            model.removeRow(selectedRow);
 
-        String idTransaksi = "INV" + (listInvoicePenjualan.size() + 1);
-        Date tanggalTransaksi = new Date(); // hari ini
-        double total = 0.0; // kamu bisa ganti jika sudah ada nilai
-        String status = "Belum Lunas";
+            listInvoice.remove(selectedRow);
 
-        // Buat objek Invoice
-        InvoicePenjualan invoice = new InvoicePenjualan(
-            idTransaksi, tanggalTransaksi, total, status, order, jatuhTempo
-        );
-
-        // Tambahkan ke ArrayList
-        listInvoicePenjualan.add(invoice);
-
-        // Tambahkan ke tabel
-        DefaultTableModel model = (DefaultTableModel) tbOrderanPenjualan.getModel();
-        model.addRow(new Object[]{order, sdf.format(jatuhTempo)});
-
-        JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_btnTambahActionPerformed
-
-    private void tbOrderanPenjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOrderanPenjualanMouseClicked
-
-    }//GEN-LAST:event_tbOrderanPenjualanMouseClicked
-
-    private void tbOrderanPenjualanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOrderanPenjualanMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbOrderanPenjualanMousePressed
+            cbOrderan.setSelectedIndex(0); 
+            jDateChooser1.setDate(null); 
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Informasi", JOptionPane.INFORMATION_MESSAGE);            
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        cbOrderanPenjualan.addItem("ORD04");
-        cbOrderanPenjualan.addItem("ORD05");
-        cbOrderanPenjualan.addItem("ORD06");
+        cbOrderan.addItem("ORD1749395257334");
+        cbOrderan.addItem("ORD02");
+        cbOrderan.addItem("ORD03");
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -269,20 +284,23 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InvoicePenjualanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InvoicePembelianGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InvoicePenjualanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InvoicePembelianGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InvoicePenjualanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InvoicePembelianGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InvoicePenjualanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InvoicePembelianGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InvoicePenjualanGUI().setVisible(true);
+                new InvoicePembelianGUI().setVisible(true);
             }
         });
     }
@@ -291,12 +309,12 @@ public class InvoicePenjualanGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> cbOrderanPenjualan;
-    private com.toedter.calendar.JDateChooser jDatePenjualan;
+    private javax.swing.JComboBox<String> cbOrderan;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbOrderanPenjualan;
+    private javax.swing.JTable tbOrderan;
     // End of variables declaration//GEN-END:variables
 }

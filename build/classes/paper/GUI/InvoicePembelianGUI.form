@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -33,11 +33,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                       <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnTambah" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -47,8 +47,8 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cbOrderanPenjualan" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jDatePenjualan" alignment="0" pref="134" max="32767" attributes="0"/>
+                          <Component id="cbOrderan" max="32767" attributes="0"/>
+                          <Component id="jDateChooser1" pref="134" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -69,21 +69,22 @@
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbOrderanPenjualan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbOrderan" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jDatePenjualan" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace pref="65" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTambah" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="189" max="-2" attributes="0"/>
+              <EmptySpace pref="127" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,7 +95,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="INVOICE PENJUALAN"/>
+        <Property name="text" type="java.lang.String" value="INVOICE PEMBELIAN"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -102,7 +103,7 @@
         <Property name="text" type="java.lang.String" value="Orderan"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbOrderanPenjualan">
+    <Component class="javax.swing.JComboBox" name="cbOrderan">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
@@ -150,7 +151,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tbOrderanPenjualan">
+        <Component class="javax.swing.JTable" name="tbOrderan">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="0">
@@ -163,13 +164,13 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbOrderanPenjualanMouseClicked"/>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbOrderanPenjualanMousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbOrderanMouseClicked"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbOrderanMousePressed"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDatePenjualan">
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
     </Component>
   </SubComponents>
 </Form>
