@@ -11,7 +11,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import paper.GUI.DaftarMitraForm;
 import paper.model.Mitra;
-import paper.model.Mitra;
 
 /**
  *
