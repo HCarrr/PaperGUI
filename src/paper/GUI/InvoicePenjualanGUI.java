@@ -7,7 +7,6 @@ package paper.GUI;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import paper.model.Mitra;
 import paper.transaction.OrderPenjualan;
 
 /**
@@ -20,7 +19,6 @@ public class InvoicePenjualanGUI extends javax.swing.JPanel {
      * Creates new form InvoicePenjualanGUI
      */
     private ArrayList<OrderPenjualan> daftarOrder = new ArrayList<>();
-    private ArrayList<Mitra> daftarMitra = new ArrayList<>();
 
     // Tambahkan di atas konstruktor
     private javax.swing.table.DefaultTableModel tableModel;
@@ -29,13 +27,14 @@ public class InvoicePenjualanGUI extends javax.swing.JPanel {
     public InvoicePenjualanGUI() {
         initComponents();
 
-        // Ambil data statis dari model
+        // Ambil data dummy dari OrderPenjualan
         daftarOrder.clear();
+        daftarOrder.addAll(paper.transaction.OrderPenjualan.DATA_SAMPLE);
 
-        // Isi cborderan hanya dengan nama mitra pelanggan dari order
+        // Isi cborderan dengan ID order dan nama mitra pelanggan
         cborderan.removeAllItems();
         for (OrderPenjualan o : daftarOrder) {
-            cborderan.addItem(o.getPelanggan().getNamaMitra());
+            cborderan.addItem(o.getIdTransaksi() + " - " + o.getPelanggan().getNamaMitra());
         }
 
         // Set model tabel

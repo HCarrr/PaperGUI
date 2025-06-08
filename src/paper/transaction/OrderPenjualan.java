@@ -6,6 +6,8 @@ import paper.model.Mitra;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 public class OrderPenjualan extends DokumenTransaksi {
     private Map<Produk, Integer> daftarProdukDijual;
@@ -68,5 +70,28 @@ public class OrderPenjualan extends DokumenTransaksi {
     @Override
     public String getDetailTransaksi() {
         return "Order Penjualan ID: " + idTransaksi + ", Total: " + String.format("%.2f", total) + ", Status: " + status + ", Pelanggan: " + pelanggan.getNamaMitra();
+    }
+
+    // Data dummy statis
+    public static final List<OrderPenjualan> DATA_SAMPLE = new ArrayList<>();
+
+    static {
+        // Ambil data mitra dan produk dari DATA_SAMPLE masing-masing
+        Mitra mitra1 = paper.model.Mitra.DATA_SAMPLE.get(0);
+        Mitra mitra2 = paper.model.Mitra.DATA_SAMPLE.get(1);
+
+        Produk produk1 = paper.model.Produk.DATA_SAMPLE.get(0);
+        Produk produk2 = paper.model.Produk.DATA_SAMPLE.get(1);
+
+        // Order 1
+        OrderPenjualan order1 = new OrderPenjualan("ORD001", new Date(), mitra1);
+        order1.tambahProduk(produk1, 2);
+
+        // Order 2
+        OrderPenjualan order2 = new OrderPenjualan("ORD002", new Date(), mitra2);
+        order2.tambahProduk(produk2, 3);
+
+        DATA_SAMPLE.add(order1);
+        DATA_SAMPLE.add(order2);
     }
 }

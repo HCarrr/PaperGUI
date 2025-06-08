@@ -1,6 +1,9 @@
 // Produk.java
 package paper.model;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Produk {
     private String idProduk;
     private String nama;
@@ -38,5 +41,14 @@ public class Produk {
 
     public String getDetailProduk() {
         return "ID: " + idProduk + ", Nama: " + nama + ", Harga Jual: " + String.format("%.2f", hargaJual) + ", Harga Beli: " + String.format("%.2f", hargaBeli);
+    }
+
+    // Data statis untuk kebutuhan GUI
+    public static final List<Produk> DATA_SAMPLE = new ArrayList<>();
+
+    static {
+        DATA_SAMPLE.add(new Produk("P001", "Kertas HVS A4", 50000, 40000, "Kertas HVS ukuran A4 70gsm"));
+        DATA_SAMPLE.add(new Produk("P002", "Pulpen Biru", 3500, 2000, "Pulpen tinta biru"));
+        DATA_SAMPLE.add(new Produk("P003", "Map Plastik", 2000, 1000, "Map plastik warna-warni"));
     }
 }

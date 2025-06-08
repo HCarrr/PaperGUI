@@ -23,19 +23,12 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
     public OrderPenjualanGUI() {
         initComponents();
 
-        // Contoh data produk
-        if (daftarProduk.isEmpty()) {
-            daftarProduk.add(new Produk("P001", "Kertas A4", 25000, 20000, "Kertas ukuran A4 80gsm"));
-            daftarProduk.add(new Produk("P002", "Pulpen", 5000, 3000, "Pulpen tinta biru"));
-            daftarProduk.add(new Produk("P003", "Buku Tulis", 12000, 9000, "Buku tulis 40 lembar"));
-        }
+        // Ambil data statis dari model
+        daftarProduk.clear();
+        daftarProduk.addAll(paper.model.Produk.DATA_SAMPLE);
 
-        // Contoh data mitra
-        if (daftarMitra.isEmpty()) {
-            daftarMitra.add(new Mitra("M001", "Toko Sukses", "Toko", "Jl. Merdeka No.1", "08123456789", "sukses@toko.com", "Budi"));
-            daftarMitra.add(new Mitra("M002", "Mitra Jaya", "Distributor", "Jl. Jaya No.2", "08234567890", "jaya@mitra.com", "Siti"));
-            daftarMitra.add(new Mitra("M003", "CV Lancar", "CV", "Jl. Lancar No.3", "08345678901", "lancar@cv.com", "Andi"));
-        }
+        daftarMitra.clear();
+        daftarMitra.addAll(paper.model.Mitra.DATA_SAMPLE);
 
         // Isi dropproduk hanya dengan nama produk
         dropproduk.removeAllItems();
