@@ -185,7 +185,7 @@ public class Dashboard extends javax.swing.JPanel {
     private void jprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jprodukActionPerformed
         javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
         javax.swing.JFrame frame = new javax.swing.JFrame("Produk");
-        //frame.setContentPane(new ProdukGUI());
+        frame.setContentPane(new ProdukGUI());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -194,7 +194,7 @@ public class Dashboard extends javax.swing.JPanel {
     private void jmitraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitraActionPerformed
         javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
         javax.swing.JFrame frame = new javax.swing.JFrame("Mitra");
-        //frame.setContentPane(new MitraGUI());
+        frame.setContentPane(new MitraForm());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -203,7 +203,7 @@ public class Dashboard extends javax.swing.JPanel {
     private void jstokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jstokActionPerformed
         javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
         javax.swing.JFrame frame = new javax.swing.JFrame("Stok");
-        //frame.setContentPane(new StokGUI());
+        frame.setContentPane(new StokGUI());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -212,7 +212,7 @@ public class Dashboard extends javax.swing.JPanel {
     private void jnetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnetworkActionPerformed
         javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
         javax.swing.JFrame frame = new javax.swing.JFrame("Network");
-        //frame.setContentPane(new NetworkGUI());
+        frame.setContentPane(new PaperNetworkGUI());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -239,7 +239,7 @@ public class Dashboard extends javax.swing.JPanel {
     private void jpembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpembelianActionPerformed
         javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
         javax.swing.JFrame frame = new javax.swing.JFrame("Pembelian");
-        //frame.setContentPane(new PembelianGUI());
+        frame.setContentPane(new OrderPembelian());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -255,15 +255,16 @@ public class Dashboard extends javax.swing.JPanel {
     }//GEN-LAST:event_jlaporanActionPerformed
 
     private void jlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlogoutActionPerformed
-        // Ambil window utama (JFrame) dari panel ini
-        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-        if (window instanceof javax.swing.JFrame frame) {
-            // Ganti panel dengan LoginGUI
-            frame.setContentPane(new LoginGUI());
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-        }
-    }//GEN-LAST:event_jlogoutActionPerformed
+    // Ambil window utama (JFrame) dari panel ini
+    java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+    if (window != null && window.getClass() == javax.swing.JFrame.class) {
+        javax.swing.JFrame frame = (javax.swing.JFrame) window;
+        // Ganti panel dengan LoginGUI
+        frame.setContentPane(new LoginGUI());
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+    }
+}//GEN-LAST:event_jlogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
