@@ -7,6 +7,8 @@ package paper.GUI;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import paper.model.Produk;
+import paper.model.Mitra;
 
 /**
  *
@@ -14,9 +16,7 @@ import javax.swing.*;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
-    private JPanel sidebar;
     private JPanel contentPanel;
-    private JButton btnProduk, btnStok, btnMitra, btnNetwork, btnLaporan, btnPembelian, btnPenjualan, btnBack;
     private JPanel homePanel;
 
     /**
@@ -29,60 +29,21 @@ public class NewJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Sidebar
-        sidebar = new JPanel();
-        sidebar.setLayout(new GridLayout(0, 1, 0, 10));
-        sidebar.setBackground(new Color(40, 40, 60));
-        sidebar.setPreferredSize(new Dimension(150, 0));
-
-        btnProduk = new JButton("Produk");
-        btnStok = new JButton("Stok");
-        btnMitra = new JButton("Mitra");
-        btnNetwork = new JButton("Network");
-        btnLaporan = new JButton("Laporan");
-        btnPembelian = new JButton("Pembelian");
-        btnPenjualan = new JButton("Penjualan");
-        btnBack = new JButton("Back");
-
-        sidebar.add(btnProduk);
-        sidebar.add(btnStok);
-        sidebar.add(btnMitra);
-        sidebar.add(btnNetwork);
-        sidebar.add(btnLaporan);
-        sidebar.add(btnPembelian);
-        sidebar.add(btnPenjualan);
-        sidebar.add(Box.createVerticalGlue());
-        sidebar.add(btnBack);
-
-        // Content Panel
         contentPanel = new JPanel(new BorderLayout());
-
-        // Home Panel (dashboard utama)
         homePanel = new JPanel();
         homePanel.setLayout(new GridBagLayout());
         JLabel lblWelcome = new JLabel("Selamat Datang di Dashboard");
         lblWelcome.setFont(new Font("Segoe UI", Font.BOLD, 20));
         homePanel.add(lblWelcome);
 
-        contentPanel.add(homePanel, BorderLayout.CENTER);
-
-        // Add to frame
-        add(sidebar, BorderLayout.WEST);
         add(contentPanel, BorderLayout.CENTER);
 
-        // Action Listeners
-        btnProduk.addActionListener(e -> showPanel(new ProdukGUI()));
-        btnStok.addActionListener(e -> showPanel(new StokGUI()));
-        btnMitra.addActionListener(e -> showPanel(new MitraGUI()));
-        btnNetwork.addActionListener(e -> showPanel(new NetworkGUI()));
-        btnLaporan.addActionListener(e -> showPanel(new LaporanGUI()));
-        btnPembelian.addActionListener(e -> showPanel(new InvoicePembelianGUI().getContentPane()));
-        btnPenjualan.addActionListener(e -> showPanel(new PenjualanGUI()));
-        btnBack.addActionListener(e -> showPanel(homePanel));
+        jlogout.setVisible(false);
+        showPanel(new LoginGUI(this));
     }
 
     // Method untuk menampilkan panel di contentPanel
-    private void showPanel(Component panel) {
+    void showPanel(Component panel) {
         contentPanel.removeAll();
         contentPanel.add(panel, BorderLayout.CENTER);
         contentPanel.revalidate();
@@ -98,7 +59,6 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jproduk = new javax.swing.JMenuItem();
@@ -115,17 +75,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jlogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 763, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
-        );
 
         jMenu1.setText("Produk");
 
@@ -221,55 +170,70 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 945, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 608, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jstokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jstokActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jstokActionPerformed
+    // Contoh pemanggilan pada menu event:
+    private void jprodukActionPerformed(java.awt.event.ActionEvent evt) {
+        showPanel(new ProdukGUI());
+    }
 
-    private void jprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jprodukActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jprodukActionPerformed
+    private void jstokActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        showPanel(new StokGUI());
+    }
 
-    private void jmitraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmitraActionPerformed
+    private void jmitraActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        showPanel(new MitraForm());
+    }
 
-    private void jnetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnetworkActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jnetworkActionPerformed
+    private void jnetworkActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        showPanel(new PaperNetworkGUI());
+    }
 
-    private void jlaporanguiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlaporanguiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jlaporanguiActionPerformed
+    private void jpembelianActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        showPanel(new OrderPembelian());
+    }
 
-    private void jpembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpembelianActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jpembelianActionPerformed
+    private void jpenjualanActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        showPanel(new OrderPenjualanGUI());
+    }
 
-    private void jpenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpenjualanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jpenjualanActionPerformed
+    private boolean isLoggedIn = false;
+    private String username = "User";
 
-    private void jloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jloginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jloginActionPerformed
+    private void jloginActionPerformed(java.awt.event.ActionEvent evt) {
+        if (!isLoggedIn) {
+            // Tampilkan panel login
+            showPanel(new LoginGUI(this)); // Pastikan LoginGUI bisa menerima NewJFrame sebagai parameter
+        } else {
+            // Sudah login, tampilkan dashboard
+            showPanel(new Dashboard(username));
+        }
+    }
 
-    private void jlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlogoutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jlogoutActionPerformed
+    // Method ini dipanggil dari LoginGUI setelah login sukses
+    public void onLoginSuccess(String username) {
+        this.isLoggedIn = true;
+        this.username = username;
+        jlogin.setText("Dashboard");
+        jlogout.setVisible(true); // Tampilkan tombol logout setelah login
+        showPanel(new Dashboard(username));
+    }
+
+    private void jlogoutActionPerformed(java.awt.event.ActionEvent evt) {
+        isLoggedIn = false;
+        username = "User";
+        jlogin.setText("Login");
+        jlogout.setVisible(false);
+        showPanel(new LoginGUI(this)); // langsung ke LoginGUI
+    }
 
     /**
      * @param args the command line arguments
@@ -286,7 +250,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu jbtn;
     private javax.swing.JMenuItem jlaporangui;
     private javax.swing.JMenuItem jlogin;
