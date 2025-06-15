@@ -129,8 +129,8 @@ public class LoginGUI extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, "Login berhasil!\nSelamat datang, " + user.getUsername(), "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             // Ganti panel ke Dashboard
             java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-            if (window instanceof javax.swing.JFrame frame) {
-                JFrame jFrame = (JFrame) window;
+            if (window != null && window.getClass() == javax.swing.JFrame.class) {
+                javax.swing.JFrame frame = (javax.swing.JFrame) window;
                 frame.setContentPane(new Dashboard(user.getUsername()));
                 frame.pack();
                 frame.setLocationRelativeTo(null);
@@ -143,7 +143,8 @@ public class LoginGUI extends javax.swing.JPanel {
     private void jregisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jregisActionPerformed
         // Pindah ke UserGUI (form registrasi user)
         java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-        if (window instanceof javax.swing.JFrame frame) {
+        if (window != null && window.getClass() == javax.swing.JFrame.class) {
+            javax.swing.JFrame frame = (javax.swing.JFrame) window;
             frame.setContentPane(new UserGUI());
             frame.pack();
             frame.setLocationRelativeTo(null);

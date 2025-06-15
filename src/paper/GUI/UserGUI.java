@@ -162,14 +162,15 @@ public class UserGUI extends javax.swing.JPanel {
 }//GEN-LAST:event_jsubmitActionPerformed
 
     private void jpunyaaakunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpunyaaakunActionPerformed
-        // Ambil window utama (JFrame) dari panel ini
-        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-        if (window instanceof javax.swing.JFrame frame) {
-            frame.setContentPane(new LoginGUI());
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-        }
-    }//GEN-LAST:event_jpunyaaakunActionPerformed
+    // Ambil window utama (JFrame) dari panel ini
+    java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+    if (window != null && window.getClass() == javax.swing.JFrame.class) {
+        javax.swing.JFrame frame = (javax.swing.JFrame) window;
+        frame.setContentPane(new LoginGUI());
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+    }
+}//GEN-LAST:event_jpunyaaakunActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
