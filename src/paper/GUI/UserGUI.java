@@ -11,12 +11,16 @@ import paper.auth.User;
  * @author Deva
  */
 public class UserGUI extends javax.swing.JPanel {
+    private NewJFrame parent;
 
-    /**
-     * Creates new form UserGUI
-     */
-    public UserGUI() {
+    public UserGUI(NewJFrame parent) {
+        this.parent = parent;
         initComponents();
+    }
+
+    // Untuk testing mandiri
+    public UserGUI() {
+        this(null);
     }
 
     /**
@@ -122,57 +126,41 @@ public class UserGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsubmitActionPerformed
-    String username = jusername.getText().trim();
-    String email = jemail.getText().trim();
-    String password = new String(jpassword.getPassword());
+        String username = jusername.getText().trim();
+        String email = jemail.getText().trim();
+        String password = new String(jpassword.getPassword());
 
-    // Validasi input
-    if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Semua field wajib diisi!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    // Validasi email harus mengandung '@'
-    if (!email.contains("@")) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Email harus mengandung karakter '@'!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        // Validasi input
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Semua field wajib diisi!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!email.contains("@")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Email harus mengandung karakter '@'!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    // Register user menggunakan User.java
-    User user = User.register(username, password, email);
-    if (user != null) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Registrasi berhasil!\nUsername: " + username, "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        // Kosongkan field setelah sukses
-        jusername.setText("");
-        jemail.setText("");
-        jpassword.setText("");
-        // Arahkan ke LoginGUI
-        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-        window.dispose(); // Tutup window registrasi
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            javax.swing.JFrame frame = new javax.swing.JFrame("Login User");
-            frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-            frame.setContentPane(new LoginGUI());
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Registrasi gagal! Username sudah ada atau password kosong.", "Gagal", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-}//GEN-LAST:event_jsubmitActionPerformed
+        User user = User.register(username, password, email);
+        if (user != null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Registrasi berhasil!\nUsername: " + username, "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            jusername.setText("");
+            jemail.setText("");
+            jpassword.setText("");
+            // Setelah registrasi, kembali ke LoginGUI
+            if (parent != null) {
+                parent.showPanel(new LoginGUI(parent));
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Registrasi gagal! Username sudah ada.", "Gagal", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jsubmitActionPerformed
 
     private void jpunyaaakunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpunyaaakunActionPerformed
-    // Ambil window utama (JFrame) dari panel ini
-    java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-    if (window != null && window.getClass() == javax.swing.JFrame.class) {
-        javax.swing.JFrame frame = (javax.swing.JFrame) window;
-        frame.setContentPane(new LoginGUI());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-    }
-}//GEN-LAST:event_jpunyaaakunActionPerformed
-
-
+        // Kembali ke LoginGUI
+        if (parent != null) {
+            parent.showPanel(new LoginGUI(parent));
+        }
+    }//GEN-LAST:event_jpunyaaakunActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -185,7 +173,6 @@ public class UserGUI extends javax.swing.JPanel {
     private javax.swing.JButton jsubmit;
     private javax.swing.JTextField jusername;
     // End of variables declaration//GEN-END:variables
-
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(() -> {
             javax.swing.JFrame frame = new javax.swing.JFrame("User Registration");

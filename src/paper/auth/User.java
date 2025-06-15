@@ -1,115 +1,46 @@
 package paper.auth;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.ArrayList;
 
 public class User {
-    private String userId;
     private String username;
-    private int passwordHash; // Simpan hash int, bukan string hash bcrypt
+    private String password;
     private String email;
-    private boolean isLoggedIn;
 
-    // Simulasi database user
-    private static final Map<String, User> usersDb = new HashMap<>();
+    public static final ArrayList<User> DATA_SAMPLE = new ArrayList<>();
 
-    public User(String userId, String username, int passwordHash, String email) {
-        this.userId = userId;
-        this.username = username;
-        this.passwordHash = passwordHash;
-        this.email = email;
-        this.isLoggedIn = false;
-        usersDb.put(username, this);
-        System.out.println("[User] User '" + username + "' created (ID: " + userId + ").");
-    }
-
-    public static User register(String username, String plainPassword, String email) {
-        if (usersDb.containsKey(username)) {
-            System.out.println("[User] Registrasi gagal: Username '" + username + "' sudah ada.");
-            return null;
-        }
-        if (plainPassword == null || plainPassword.isEmpty()) {
-            System.out.println("[User] Registrasi gagal: Password tidak boleh kosong.");
-            return null;
-        }
-
-        String newUserId = UUID.randomUUID().toString();
-        int hashedPassword = hashPassword(plainPassword);
-        System.out.println("[User] User '" + username + "' berhasil didaftarkan.");
-        return new User(newUserId, username, hashedPassword, email);
-    }
-
-    public static User authenticate(String username, String plainPassword) {
-        User user = usersDb.get(username);
-        if (user == null) {
-            System.out.println("[User] Otentikasi gagal: User '" + username + "' tidak ditemukan.");
-            return null;
-        }
-
-        if (user.verifyPassword(plainPassword)) {
-            user.setLoggedIn(true);
-            System.out.println("[User] User '" + username + "' berhasil login.");
-            return user;
-        } else {
-            System.out.println("[User] Otentikasi gagal: Password salah untuk user '" + username + "'.");
-            return null;
-        }
-    }
-
-    public boolean changePassword(String oldPlainPassword, String newPlainPassword) {
-        if (!verifyPassword(oldPlainPassword)) {
-            System.out.println("[User] Gagal mengubah password: Password lama salah.");
-            return false;
-        }
-        if (newPlainPassword == null || newPlainPassword.isEmpty()) {
-            System.out.println("[User] Gagal mengubah password: Password baru tidak boleh kosong.");
-            return false;
-        }
-        this.passwordHash = hashPassword(newPlainPassword);
-        System.out.println("[User] Password untuk user '" + this.username + "' berhasil diubah.");
-        return true;
-    }
-
-    private static int hashPassword(String plainPassword) {
-        return plainPassword.hashCode();
-    }
-
-    private boolean verifyPassword(String plainPassword) {
-        return this.passwordHash == hashPassword(plainPassword);
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public boolean isLoggedIn() {
-        return isLoggedIn;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
-    }
-
-    public void logout() {
-        this.isLoggedIn = false;
-        System.out.println("[User] User '" + this.username + "' berhasil logout.");
-    }
-
-    // Static block untuk membuat akun default admin
+    // Static block untuk data bawaan
     static {
-        register("admin", "admin123", "admin@gmail.com");
+        DATA_SAMPLE.add(new User("admin", "admin123", "admin@paper.com"));
+    }
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public String getUsername() { return username; }
+    public String getPassword() { return password; }
+    public String getEmail() { return email; }
+
+    // Register user
+    public static User register(String username, String password, String email) {
+        for (User u : DATA_SAMPLE) {
+            if (u.getUsername().equalsIgnoreCase(username)) return null; // sudah ada
+        }
+        User user = new User(username, password, email);
+        DATA_SAMPLE.add(user);
+        return user;
+    }
+
+    // Authenticate user
+    public static User authenticate(String username, String password) {
+        for (User u : DATA_SAMPLE) {
+            if (u.getUsername().equalsIgnoreCase(username) && u.getPassword().equals(password)) {
+                return u;
+            }
+        }
+        return null;
     }
 }
