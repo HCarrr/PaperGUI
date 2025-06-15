@@ -34,252 +34,59 @@ public class Dashboard extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jproduk = new javax.swing.JButton();
-        jmitra = new javax.swing.JButton();
-        jstok = new javax.swing.JButton();
-        jnetwork = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        juser = new javax.swing.JButton();
-        jpenjualan = new javax.swing.JButton();
-        jpembelian = new javax.swing.JButton();
-        jlaporan = new javax.swing.JButton();
-        jlogout = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Selamat datang");
 
-        jproduk.setText("produk");
-        jproduk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jprodukActionPerformed(evt);
-            }
-        });
-
-        jmitra.setText("mitra");
-        jmitra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmitraActionPerformed(evt);
-            }
-        });
-
-        jstok.setText("stok");
-        jstok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jstokActionPerformed(evt);
-            }
-        });
-
-        jnetwork.setText("network");
-        jnetwork.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jnetworkActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("User");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("DASHBOARD PAPER");
-
-        juser.setText("user");
-        juser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                juserActionPerformed(evt);
-            }
-        });
-
-        jpenjualan.setText("Penjualan");
-        jpenjualan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jpenjualanActionPerformed(evt);
-            }
-        });
-
-        jpembelian.setText("pembelian");
-        jpembelian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jpembelianActionPerformed(evt);
-            }
-        });
-
-        jlaporan.setText("laporan");
-        jlaporan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jlaporanActionPerformed(evt);
-            }
-        });
-
-        jlogout.setText("logout");
-        jlogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jlogoutActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
+                        .addGap(55, 55, 55)
                         .addComponent(jLabel1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jlogout))))
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(juser)
-                            .addComponent(jproduk))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jmitra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jstok)
-                                .addGap(18, 18, 18)
-                                .addComponent(jnetwork))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jpenjualan)
-                                .addGap(18, 18, 18)
-                                .addComponent(jpembelian)
-                                .addGap(16, 16, 16)
-                                .addComponent(jlaporan)))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel2)))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel2)
-                .addGap(42, 42, 42)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jlogout))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jproduk)
-                    .addComponent(jmitra)
-                    .addComponent(jstok)
-                    .addComponent(jnetwork))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(juser)
-                    .addComponent(jpenjualan)
-                    .addComponent(jpembelian)
-                    .addComponent(jlaporan))
-                .addContainerGap(86, Short.MAX_VALUE))
+                    .addComponent(jLabel3))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         jLabel3.getAccessibleContext().setAccessibleName("username");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jprodukActionPerformed
-        javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
-        javax.swing.JFrame frame = new javax.swing.JFrame("Produk");
-        frame.setContentPane(new ProdukGUI());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_jprodukActionPerformed
-
-    private void jmitraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmitraActionPerformed
-        javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
-        javax.swing.JFrame frame = new javax.swing.JFrame("Mitra");
-        frame.setContentPane(new MitraForm());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_jmitraActionPerformed
-
-    private void jstokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jstokActionPerformed
-        javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
-        javax.swing.JFrame frame = new javax.swing.JFrame("Stok");
-        frame.setContentPane(new StokGUI());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_jstokActionPerformed
-
-    private void jnetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnetworkActionPerformed
-        javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
-        javax.swing.JFrame frame = new javax.swing.JFrame("Network");
-        frame.setContentPane(new PaperNetworkGUI());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_jnetworkActionPerformed
-
-    private void juserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_juserActionPerformed
-        javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
-        javax.swing.JFrame frame = new javax.swing.JFrame("User");
-        frame.setContentPane(new UserGUI());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_juserActionPerformed
-
-    private void jpenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpenjualanActionPerformed
-        javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
-        javax.swing.JFrame frame = new javax.swing.JFrame("Penjualan");
-        frame.setContentPane(new OrderPenjualanGUI());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_jpenjualanActionPerformed
-
-    private void jpembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpembelianActionPerformed
-        javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
-        javax.swing.JFrame frame = new javax.swing.JFrame("Pembelian");
-        frame.setContentPane(new OrderPembelian());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_jpembelianActionPerformed
-
-    private void jlaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlaporanActionPerformed
-        javax.swing.SwingUtilities.getWindowAncestor(this).setVisible(false);
-        javax.swing.JFrame frame = new javax.swing.JFrame("Laporan");
-        //frame.setContentPane(new LaporanGUI());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }//GEN-LAST:event_jlaporanActionPerformed
-
-    private void jlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlogoutActionPerformed
-    // Ambil window utama (JFrame) dari panel ini
-    java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-    if (window != null && window.getClass() == javax.swing.JFrame.class) {
-        javax.swing.JFrame frame = (javax.swing.JFrame) window;
-        // Ganti panel dengan LoginGUI
-        frame.setContentPane(new LoginGUI());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-    }
-}//GEN-LAST:event_jlogoutActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton jlaporan;
-    private javax.swing.JButton jlogout;
-    private javax.swing.JButton jmitra;
-    private javax.swing.JButton jnetwork;
-    private javax.swing.JButton jpembelian;
-    private javax.swing.JButton jpenjualan;
-    private javax.swing.JButton jproduk;
-    private javax.swing.JButton jstok;
-    private javax.swing.JButton juser;
     // End of variables declaration//GEN-END:variables
 
     private String username;
+
+    public void logout() {
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+        if (window instanceof paper.GUI.NewJFrame) {
+            ((paper.GUI.NewJFrame) window).logout(); // panggil method logout yang benar
+        }
+    }
 }
