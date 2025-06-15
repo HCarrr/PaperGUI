@@ -3,12 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Deva/Downloads/PaperGUI/src/paper/PaperNetworkGUI.java</file>
-            <file>file:/C:/Users/Deva/Downloads/PaperGUI/src/paper/PaperNetwork.java</file>
-            <file>file:/C:/Users/Deva/Downloads/PaperGUI/src/paper/Mitra.java</file>
-            <file>file:/C:/Users/Deva/Downloads/PaperGUI/src/paper/DaftarMitraForm.java</file>
-            <file>file:/C:/Users/Deva/Downloads/PaperGUI/src/paper/Produk.java</file>
-            <file>file:/C:/Users/Deva/Downloads/PaperGUI/src/paper/MitraForm.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/model/InvoicePembelian.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/GUI/OrderPenjualanGUI.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/GUI/InvoicePembelianGUI.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/GUI/OrderPembelian.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/GUI/UserGUI.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/GUI/MitraForm.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/model/KuitansiPembelian.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/GUI/KuitansiPembelianGUI.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/model/Mitra.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/model/PaperNetwork.java</file>
+            <file>file:/D:/huda/Telkom/Semester%202/DPBO/PaperGUI/src/paper/auth/User.java</file>
         </group>
     </open-files>
 </project-private>
