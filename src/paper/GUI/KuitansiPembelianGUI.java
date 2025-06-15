@@ -5,17 +5,22 @@
  */
 package paper.GUI;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import paper.model.KuitansiPembelian;
+
 /**
  *
  * @author hudac
  */
-public class KuitansiPembelian extends javax.swing.JFrame {
-
+public class KuitansiPembelianGUI extends javax.swing.JFrame {
+    private ArrayList<KuitansiPembelian> listKuitansi = new ArrayList<>();
     /**
      * Creates new form KuitansiPembelian
      */
-    public KuitansiPembelian() {
-        initComponents();
+    public KuitansiPembelianGUI() {
+        initComponents();        
     }
 
     /**
@@ -30,22 +35,22 @@ public class KuitansiPembelian extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfIdInvoice = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tfTotalInvoice = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tfNNewId = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btnSimpan = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         taDetailOrder = new javax.swing.JTextArea();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane4 = new javax.swing.JScrollPane();
-        taDetailOrder1 = new javax.swing.JTextArea();
+        taDetailKuitansi = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,10 +69,10 @@ public class KuitansiPembelian extends javax.swing.JFrame {
 
         jLabel6.setText("Jatuh Tempo : ");
 
-        jButton1.setText("Buat Kuitansi");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSimpan.setText("Buat Kuitansi");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSimpanActionPerformed(evt);
             }
         });
 
@@ -76,10 +81,10 @@ public class KuitansiPembelian extends javax.swing.JFrame {
         taDetailOrder.setText("Log Proses Verifikasi");
         jScrollPane3.setViewportView(taDetailOrder);
 
-        taDetailOrder1.setColumns(20);
-        taDetailOrder1.setRows(5);
-        taDetailOrder1.setText("Detail Kuitansi");
-        jScrollPane4.setViewportView(taDetailOrder1);
+        taDetailKuitansi.setColumns(20);
+        taDetailKuitansi.setRows(5);
+        taDetailKuitansi.setText("Detail Kuitansi");
+        jScrollPane4.setViewportView(taDetailKuitansi);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,15 +108,15 @@ public class KuitansiPembelian extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField3)
-                                .addComponent(jTextField2)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfNNewId)
+                                .addComponent(tfTotalInvoice)
+                                .addComponent(tfIdInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(177, Short.MAX_VALUE))
             .addComponent(jSeparator2)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnSimpan)
                 .addGap(40, 40, 40))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -134,15 +139,15 @@ public class KuitansiPembelian extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfIdInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfTotalInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNNewId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -152,7 +157,7 @@ public class KuitansiPembelian extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jButton1)
+                .addComponent(btnSimpan)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(214, 214, 214)
@@ -171,9 +176,35 @@ public class KuitansiPembelian extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        
+        String totalInvoice = tfTotalInvoice.getText();
+        String newIdKuitansi = tfNNewId.getText();
+
+        if (totalInvoice.isEmpty() || newIdKuitansi.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Semua field kuitansi wajib diisi.");
+            return;
+        } 
+        
+        KuitansiPembelian kuitansi = new KuitansiPembelian(
+            totalInvoice, newIdKuitansi
+        );
+
+        // Tambahkan ke ArrayList
+        listKuitansi.add(kuitansi);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("===== DETAIL KUITANSI =====\n");
+        sb.append("Total Invoice : ").append(tfTotalInvoice.getText()).append("\n");
+        sb.append("New Id : ").append(tfNNewId.getText()).append("\n");
+        
+        taDetailKuitansi.setText(sb.toString());
+        
+        tfTotalInvoice.setText("");
+        tfNNewId.setText("");
+
+        JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,26 +223,27 @@ public class KuitansiPembelian extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KuitansiPembelian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KuitansiPembelianGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KuitansiPembelian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KuitansiPembelianGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KuitansiPembelian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KuitansiPembelianGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KuitansiPembelian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KuitansiPembelianGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KuitansiPembelian().setVisible(true);
+                new KuitansiPembelianGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -225,10 +257,10 @@ public class KuitansiPembelian extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextArea taDetailKuitansi;
     private javax.swing.JTextArea taDetailOrder;
-    private javax.swing.JTextArea taDetailOrder1;
+    private javax.swing.JTextField tfIdInvoice;
+    private javax.swing.JTextField tfNNewId;
+    private javax.swing.JTextField tfTotalInvoice;
     // End of variables declaration//GEN-END:variables
 }

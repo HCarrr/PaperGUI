@@ -51,6 +51,12 @@ public class LoginGUI extends javax.swing.JPanel {
             }
         });
 
+        jusername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jusernameActionPerformed(evt);
+            }
+        });
+
         jregis.setText("register");
         jregis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +149,10 @@ public class LoginGUI extends javax.swing.JPanel {
             frame.setLocationRelativeTo(null);
         }
     }//GEN-LAST:event_jregisActionPerformed
+
+    private void jusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jusernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jusernameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
