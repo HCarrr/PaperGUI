@@ -6,6 +6,8 @@ package paper.GUI;
 
 import paper.model.Mitra;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import paper.model.OrderPenjualan;
 import paper.model.Produk;
 
 /**
@@ -15,6 +17,7 @@ import paper.model.Produk;
 public class OrderPenjualanGUI extends javax.swing.JPanel {
     private ArrayList<Produk> daftarProduk = new ArrayList<>();
     private ArrayList<Mitra> daftarMitra = new ArrayList<>();
+    private OrderPenjualan currentOrder;
 
     // Tambahkan di atas konstruktor
     private javax.swing.table.DefaultTableModel tableModel;
@@ -28,7 +31,7 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
         daftarProduk.addAll(paper.model.Produk.DATA_SAMPLE);
 
         daftarMitra.clear();
-        daftarMitra.addAll(paper.model.Mitra.DATA_SAMPLE);
+//        daftarMitra.addAll(paper.model.Mitra.dataMitra);
 
         // Isi dropproduk hanya dengan nama produk
         dropproduk.removeAllItems();
@@ -39,7 +42,7 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
         // Isi dopmitra hanya dengan nama mitra
         dopmitra.removeAllItems();
         for (Mitra m : daftarMitra) {
-            dopmitra.addItem(m.getNamaMitra());
+            dopmitra.addItem(m.getNama());
         }
 
         // Set model tabel
@@ -171,15 +174,21 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
     private void jsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsubmitActionPerformed
         int idxProduk = dropproduk.getSelectedIndex();
         int idxMitra = dopmitra.getSelectedIndex();
+
         if (idxProduk < 0 || idxMitra < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Pilih produk dan mitra!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Pilih produk dan mitra!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String namaProduk = daftarProduk.get(idxProduk).getNama();
-        String namaMitra = daftarMitra.get(idxMitra).getNamaMitra();
 
-        // Tambahkan ke tabel
-        tableModel.addRow(new Object[]{namaProduk, namaMitra});
+        Produk produkDipilih = daftarProduk.get(idxProduk);
+        Mitra mitraDipilih = daftarMitra.get(idxMitra);
+
+        if (currentOrder == null || !currentOrder.getPelanggan().equals(mitraDipilih)) {
+            currentOrder = new OrderPenjualan("ORD" + System.currentTimeMillis(), new java.util.Date(), 0.0, mitraDipilih);
+        }
+
+        currentOrder.tambahProduk(produkDipilih, 1); // Tambah 1 sebagai default
+        tableModel.addRow(new Object[]{produkDipilih.getNama(), mitraDipilih.getNama()});
         jTable1.clearSelection();
     }//GEN-LAST:event_jsubmitActionPerformed
 
@@ -210,7 +219,7 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
             return;
         }
         String namaProduk = daftarProduk.get(idxProduk).getNama();
-        String namaMitra = daftarMitra.get(idxMitra).getNamaMitra();
+        String namaMitra = daftarMitra.get(idxMitra).getNama();
 
         // Update data di tabel
         tableModel.setValueAt(namaProduk, selectedRow, 0);

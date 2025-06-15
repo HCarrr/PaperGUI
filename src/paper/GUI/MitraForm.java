@@ -42,21 +42,16 @@ public class MitraForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         tfId = new javax.swing.JTextField();
         tfNama = new javax.swing.JTextField();
-        tfType = new javax.swing.JTextField();
         tfAlamat = new javax.swing.JTextField();
-        tfEmail = new javax.swing.JTextField();
-        tfTelepon = new javax.swing.JTextField();
-        tfKontakPerson = new javax.swing.JTextField();
+        tfKontak = new javax.swing.JTextField();
         btnSimpan = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnOrderPembelian = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -72,20 +67,20 @@ public class MitraForm extends javax.swing.JFrame {
 
         TbMitra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id. Mitra", "Nama", "Type", "Alamat", "Email", "No. Telepon", "Kontak Person"
+                "Id. Mitra", "Nama", "Alamat", "No. Telepon"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -107,15 +102,9 @@ public class MitraForm extends javax.swing.JFrame {
 
         jLabel2.setText("Nama");
 
-        jLabel3.setText("Type");
-
         jLabel4.setText("Alamat");
 
-        jLabel5.setText("Email");
-
         jLabel6.setText("No. Telepon");
-
-        jLabel7.setText("Kontak Person Utama");
 
         tfId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,33 +118,15 @@ public class MitraForm extends javax.swing.JFrame {
             }
         });
 
-        tfType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTypeActionPerformed(evt);
-            }
-        });
-
         tfAlamat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfAlamatActionPerformed(evt);
             }
         });
 
-        tfEmail.addActionListener(new java.awt.event.ActionListener() {
+        tfKontak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEmailActionPerformed(evt);
-            }
-        });
-
-        tfTelepon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTeleponActionPerformed(evt);
-            }
-        });
-
-        tfKontakPerson.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfKontakPersonActionPerformed(evt);
+                tfKontakActionPerformed(evt);
             }
         });
 
@@ -175,20 +146,14 @@ public class MitraForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(61, 61, 61)
+                    .addComponent(jLabel6))
+                .addGap(114, 114, 114)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfNama, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfKontakPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfKontak, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -200,7 +165,7 @@ public class MitraForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfKontak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -209,25 +174,13 @@ public class MitraForm extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(tfNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(59, 59, 59)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(tfAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
+                        .addGap(100, 100, 100)
                         .addComponent(jLabel6)))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfKontakPerson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(32, 32, 32)
+                .addGap(82, 82, 82)
                 .addComponent(btnSimpan)
                 .addContainerGap())
         );
@@ -246,6 +199,13 @@ public class MitraForm extends javax.swing.JFrame {
             }
         });
 
+        btnOrderPembelian.setText("Order Pembelian");
+        btnOrderPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderPembelianActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -255,14 +215,16 @@ public class MitraForm extends javax.swing.JFrame {
                 .addComponent(txtInvoice)
                 .addGap(107, 107, 107)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnOrderPembelian)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
@@ -284,7 +246,8 @@ public class MitraForm extends javax.swing.JFrame {
                         .addComponent(btnDelete)
                         .addGap(66, 66, 66)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnOrderPembelian))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -297,7 +260,7 @@ public class MitraForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 33, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         pack();
@@ -305,41 +268,41 @@ public class MitraForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        if (tfId.getText().isEmpty() || tfNama.getText().isEmpty() || tfType.getText().isEmpty()
-            || tfAlamat.getText().isEmpty() || tfEmail.getText().isEmpty()
-            || tfTelepon.getText().isEmpty() || tfKontakPerson.getText().isEmpty()) {
-        
+        if (tfId.getText().isEmpty() || tfNama.getText().isEmpty() ||
+        tfAlamat.getText().isEmpty() || tfKontak.getText().isEmpty()) {
+
         JOptionPane.showMessageDialog(null, "Semua kolom harus diisi!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-    
-    } else if (tfTelepon.getText().length() < 10) {
-        JOptionPane.showMessageDialog(null, "No. Telepon minimal terdiri dari 10 angka", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-    
     } else {
         try {
-            DefaultTableModel model = (DefaultTableModel) TbMitra.getModel();
+            for (Mitra m : dataMitra) {
+                if (m.getIdMitra().equalsIgnoreCase(tfId.getText())) {
+                    throw new IllegalArgumentException("ID Mitra sudah terdaftar!");
+                }
+            }
+            
+            if (tfKontak.getText().length() < 12) {
+                throw new IllegalArgumentException("Nomor telepon harus minimal 12 digit!");
+            }
 
-            // Tambahkan data ke tabel
+            Mitra mitra = new Mitra(tfId.getText(), tfNama.getText(), tfAlamat.getText(), tfKontak.getText());
+            dataMitra.add(mitra);
+
+            DefaultTableModel model = (DefaultTableModel) TbMitra.getModel();
             model.addRow(new Object[]{
-                tfId.getText(),
-                tfNama.getText(),
-                tfType.getText(),
-                tfAlamat.getText(),
-                tfEmail.getText(),
-                tfTelepon.getText(),
-                tfKontakPerson.getText()
-            });
+                mitra.getIdMitra(),
+                mitra.getNama(),
+                mitra.getAlamat(),
+                mitra.getKontak()
+            });                        
 
             JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
 
-            // Kosongkan semua textfield setelah tambah
             tfId.setText("");
             tfNama.setText("");
-            tfType.setText("");
             tfAlamat.setText("");
-            tfEmail.setText("");
-            tfTelepon.setText("");
-            tfKontakPerson.setText("");
-
+            tfKontak.setText("");
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Validasi Gagal", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -354,42 +317,26 @@ public class MitraForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNamaActionPerformed
 
-    private void tfTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTypeActionPerformed
-
     private void tfAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAlamatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfAlamatActionPerformed
 
-    private void tfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmailActionPerformed
+    private void tfKontakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKontakActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfEmailActionPerformed
-
-    private void tfTeleponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTeleponActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTeleponActionPerformed
-
-    private void tfKontakPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKontakPersonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfKontakPersonActionPerformed
+    }//GEN-LAST:event_tfKontakActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
          tampilkanDataKeTabel();
     }//GEN-LAST:event_formWindowOpened
 
     private void TbMitraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbMitraMouseClicked
-        // TODO add your handling code here:
-        int selectedRow = TbMitra.getSelectedRow(); // Ambil baris yang diklik
+        int selectedRow = TbMitra.getSelectedRow();
 
         if (selectedRow >= 0) {
             tfId.setText(TbMitra.getValueAt(selectedRow, 0).toString());
             tfNama.setText(TbMitra.getValueAt(selectedRow, 1).toString());
-            tfType.setText(TbMitra.getValueAt(selectedRow, 2).toString());
-            tfAlamat.setText(TbMitra.getValueAt(selectedRow, 3).toString());
-            tfEmail.setText(TbMitra.getValueAt(selectedRow, 4).toString());
-            tfTelepon.setText(TbMitra.getValueAt(selectedRow, 5).toString());
-            tfKontakPerson.setText(TbMitra.getValueAt(selectedRow, 6).toString());
+            tfAlamat.setText(TbMitra.getValueAt(selectedRow, 2).toString());
+            tfKontak.setText(TbMitra.getValueAt(selectedRow, 3).toString());
         }
     }//GEN-LAST:event_TbMitraMouseClicked
 
@@ -400,19 +347,13 @@ public class MitraForm extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) TbMitra.getModel();
             model.setValueAt(tfId.getText(), selectedRow, 0);
             model.setValueAt(tfNama.getText(), selectedRow, 1);
-            model.setValueAt(tfType.getText(), selectedRow, 2);
-            model.setValueAt(tfAlamat.getText(), selectedRow, 3);
-            model.setValueAt(tfEmail.getText(), selectedRow, 4);
-            model.setValueAt(tfTelepon.getText(), selectedRow, 5);
-            model.setValueAt(tfKontakPerson.getText(), selectedRow, 6);
+            model.setValueAt(tfAlamat.getText(), selectedRow, 2);
+            model.setValueAt(tfKontak.getText(), selectedRow, 3);
             
             tfId.setText("");
             tfNama.setText("");
-            tfType.setText("");
             tfAlamat.setText("");
-            tfEmail.setText("");
-            tfTelepon.setText("");
-            tfKontakPerson.setText("");
+            tfKontak.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "Pilih baris yang ingin diupdate terlebih dahulu.");
         }
@@ -428,29 +369,29 @@ public class MitraForm extends javax.swing.JFrame {
             // Kosongkan semua TextField
             tfId.setText("");
             tfNama.setText("");
-            tfType.setText("");
             tfAlamat.setText("");
-            tfEmail.setText("");
-            tfTelepon.setText("");
-            tfKontakPerson.setText("");
+            tfKontak.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "Pilih baris yang ingin dihapus terlebih dahulu.");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnOrderPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderPembelianActionPerformed
+        // TODO add your handling code here:
+        new OrderPembelian().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnOrderPembelianActionPerformed
+
     private void tampilkanDataKeTabel() {
     DefaultTableModel model = (DefaultTableModel) TbMitra.getModel();
-    model.setRowCount(0); // Kosongkan tabel
+    model.setRowCount(0);
 
     for (Mitra m : dataMitra) {
-        Object[] row = new Object[] {
+        Object[] row = new Object[]{
             m.getIdMitra(),
-            m.getNamaMitra(),
-            m.getJenisMitra(),
+            m.getNama(),
             m.getAlamat(),
-            m.getEmail(),
-            m.getTelepon(),
-            m.getKontakPersonUtama()
+            m.getKontak()
         };
         model.addRow(row);
     }
@@ -497,25 +438,20 @@ public class MitraForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TbMitra;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnOrderPembelian;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField tfAlamat;
-    private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfId;
-    private javax.swing.JTextField tfKontakPerson;
+    private javax.swing.JTextField tfKontak;
     private javax.swing.JTextField tfNama;
-    private javax.swing.JTextField tfTelepon;
-    private javax.swing.JTextField tfType;
     private javax.swing.JLabel txtInvoice;
     // End of variables declaration//GEN-END:variables
 }

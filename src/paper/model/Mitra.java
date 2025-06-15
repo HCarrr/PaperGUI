@@ -1,61 +1,35 @@
 package paper.model;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public class Mitra {
     private String idMitra;
-    private String namaMitra;
-    private String jenisMitra;    
+    private String nama;
     private String alamat;
-    private String telepon;
-    private String email;
-    private String kontakPersonUtama;
+    private String kontak;
 
-    // Data statis untuk kebutuhan GUI
-    public static final List<Mitra> DATA_SAMPLE = new ArrayList<>();
-
-    static {
-        DATA_SAMPLE.add(new Mitra("M001", "Toko Sukses", "Toko", "Jl. Merdeka No.1", "08123456789", "sukses@toko.com", "Budi"));
-        DATA_SAMPLE.add(new Mitra("M002", "Mitra Jaya", "Distributor", "Jl. Jaya No.2", "08234567890", "jaya@mitra.com", "Siti"));
-        DATA_SAMPLE.add(new Mitra("M003", "CV Lancar", "CV", "Jl. Lancar No.3", "08345678901", "lancar@cv.com", "Andi"));
-    }
-
-    public Mitra(String idMitra, String namaMitra, String jenisMitra, String alamat, String telepon, String email, String kontakPersonUtama) {
+    public Mitra(String idMitra, String nama, String alamat, String kontak) {
         this.idMitra = idMitra;
-        this.namaMitra = namaMitra;
-        this.jenisMitra = jenisMitra;
+        this.nama = nama;
         this.alamat = alamat;
-        this.telepon = telepon;
-        this.email = email;
-        this.kontakPersonUtama = kontakPersonUtama;
+        this.kontak = kontak;
     }
 
     public String getIdMitra() {
         return idMitra;
     }
 
-    public String getNamaMitra() {
-        return namaMitra;
-    }
-
-    public String getJenisMitra() {
-        return jenisMitra;
+    public String getNama() {
+        return nama;
     }
 
     public String getAlamat() {
         return alamat;
     }
 
-    public String getTelepon() {
-        return telepon;
+    public String getKontak() {
+        return kontak;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getKontakPersonUtama() {
-        return kontakPersonUtama;
+    public String getDetailMitra() {
+        return "ID: " + idMitra + ", Nama: " + nama + ", Alamat: " + alamat + ", Kontak: " + kontak;
     }
 }

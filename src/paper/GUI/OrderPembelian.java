@@ -7,6 +7,7 @@ package paper.GUI;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import paper.model.Mitra;
 
 /**
  *
@@ -356,9 +357,10 @@ public class OrderPembelian extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         tfIdOrder.setText("ORD" + System.currentTimeMillis()); // atau format custom
-        cbMitra.addItem("Huda");
-        cbMitra.addItem("CV. Sinar Jaya");
-        cbMitra.addItem("Toko Sumber Rezeki");
+        cbMitra.removeAllItems();
+        for (Mitra mitra : MitraForm.dataMitra) {
+            cbMitra.addItem(mitra.getNama());
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed

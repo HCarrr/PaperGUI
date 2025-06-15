@@ -1,6 +1,14 @@
-// DokumenTransaksi.java
-package paper.transaction;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package paper.model;
 
+/**
+ *
+ * @author hudac
+ */
 import java.util.Date;
 
 public abstract class DokumenTransaksi {
@@ -14,10 +22,6 @@ public abstract class DokumenTransaksi {
         this.tanggalTransaksi = tanggalTransaksi;
         this.total = total;
         this.status = status;
-    }
-
-    public DokumenTransaksi(String idTransaksi, Date tanggalTransaksi, String status) {
-        this(idTransaksi, tanggalTransaksi, 0.0, status);
     }
 
     public String getIdTransaksi() {

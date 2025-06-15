@@ -6,7 +6,6 @@
 package paper.model;
 
 import java.util.Date;
-import paper.transaction.Kuitansi;
 
 /**
  *
