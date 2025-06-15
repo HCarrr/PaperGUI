@@ -16,7 +16,8 @@ import paper.model.Mitra;
  * @author hudac
  */
 public class MitraForm extends javax.swing.JFrame {
-    public static List<Mitra> dataMitra = new ArrayList<>();
+    // Gunakan referensi langsung ke static list Mitra
+    public static java.util.List<Mitra> dataMitra = paper.model.Mitra.DATA_SAMPLE;
     /**
      * Creates new form Test1
      */
@@ -383,19 +384,20 @@ public class MitraForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOrderPembelianActionPerformed
 
     private void tampilkanDataKeTabel() {
-    DefaultTableModel model = (DefaultTableModel) TbMitra.getModel();
-    model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) TbMitra.getModel();
+        model.setRowCount(0);
 
-    for (Mitra m : dataMitra) {
-        Object[] row = new Object[]{
-            m.getIdMitra(),
-            m.getNama(),
-            m.getAlamat(),
-            m.getKontak()
-        };
-        model.addRow(row);
+        // Selalu ambil data dari Mitra.DATA_SAMPLE
+        for (Mitra m : paper.model.Mitra.DATA_SAMPLE) {
+            Object[] row = new Object[]{
+                m.getIdMitra(),
+                m.getNama(),
+                m.getAlamat(),
+                m.getKontak()
+            };
+            model.addRow(row);
+        }
     }
-}
 
     /**
      * @param args the command line arguments

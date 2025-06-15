@@ -86,7 +86,8 @@ public class Dashboard extends javax.swing.JPanel {
     public void logout() {
         java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
         if (window instanceof paper.GUI.NewJFrame) {
-            ((paper.GUI.NewJFrame) window).logout(); // panggil method logout yang benar
+            // Panggil event handler logout yang sudah ada
+            ((paper.GUI.NewJFrame) window).jlogoutActionPerformed(null);
         }
     }
 }

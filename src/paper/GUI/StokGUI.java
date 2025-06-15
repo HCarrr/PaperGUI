@@ -10,7 +10,8 @@ import javax.swing.JOptionPane;
 import paper.model.Stok;
 
 public class StokGUI extends javax.swing.JPanel {
-    private ArrayList<Stok> daftarStok = new ArrayList<>();
+    // private java.util.List<Stok> daftarStok = paper.model.Stok.DATA_SAMPLE;
+    // Ganti dengan akses langsung ke Stok.getStokList()
     private DefaultTableModel tableModel;
 
     public StokGUI() {
@@ -21,14 +22,17 @@ public class StokGUI extends javax.swing.JPanel {
         jTable1.setModel(tableModel);
         refreshTable();
 
+        ids.setEditable(false); // Pastikan field ID tidak bisa diisi user
+        ids.setText(""); // Selalu kosongkan field ID saat tambah data baru
+
         jsubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String id = ids.getText().trim();
+                // String id = ids.getText().trim(); // Tidak perlu ambil ID dari input
                 String jumlahStr = jumlahs.getText().trim();
                 String lokasi = lokasis.getText().trim();
 
-                if (id.isEmpty() || jumlahStr.isEmpty() || lokasi.isEmpty()) {
-                    JOptionPane.showMessageDialog(StokGUI.this, "Semua field wajib diisi!", "Error", JOptionPane.ERROR_MESSAGE);
+                if (jumlahStr.isEmpty() || lokasi.isEmpty()) {
+                    JOptionPane.showMessageDialog(StokGUI.this, "Jumlah dan lokasi wajib diisi!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -49,19 +53,11 @@ public class StokGUI extends javax.swing.JPanel {
                     return;
                 }
 
-                for (Stok s : daftarStok) {
-                    if (s.getIdStok().equals(id)) {
-                        JOptionPane.showMessageDialog(StokGUI.this, "ID stok sudah ada!", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                }
+                // Tidak perlu cek duplikasi ID karena ID auto-generated
 
-                daftarStok.add(new Stok(id, jumlah, lokasi));
-                tableModel.setRowCount(0);
-                for (Stok s : daftarStok) {
-                    tableModel.addRow(new Object[]{s.getIdStok(), s.getJumlah(), s.getLokasi()});
-                }
-                ids.setText("");
+                paper.model.Stok.addStok(new Stok(jumlah, lokasi));
+                refreshTable();
+                ids.setText(""); // Kosongkan field ID setelah tambah
                 jumlahs.setText("");
                 lokasis.setText("");
             }
@@ -74,12 +70,12 @@ public class StokGUI extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(StokGUI.this, "Pilih baris yang ingin diedit di tabel!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                String id = ids.getText().trim();
+                // String id = ids.getText().trim(); // ID tidak boleh diedit
                 String jumlahStr = jumlahs.getText().trim();
                 String lokasi = lokasis.getText().trim();
 
-                if (id.isEmpty() || jumlahStr.isEmpty() || lokasi.isEmpty()) {
-                    JOptionPane.showMessageDialog(StokGUI.this, "Semua field wajib diisi!", "Error", JOptionPane.ERROR_MESSAGE);
+                if (jumlahStr.isEmpty() || lokasi.isEmpty()) {
+                    JOptionPane.showMessageDialog(StokGUI.this, "Jumlah dan lokasi wajib diisi!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -100,23 +96,13 @@ public class StokGUI extends javax.swing.JPanel {
                     return;
                 }
 
-                for (int i = 0; i < daftarStok.size(); i++) {
-                    if (i != selectedRow && daftarStok.get(i).getIdStok().equals(id)) {
-                        JOptionPane.showMessageDialog(StokGUI.this, "ID stok sudah ada di baris lain!", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                }
+                // Tidak perlu cek duplikasi ID
 
-                Stok stok = daftarStok.get(selectedRow);
-                stok.setIdStok(id);
+                Stok stok = paper.model.Stok.getStokList().get(selectedRow);
                 stok.setJumlah(jumlah);
                 stok.setLokasi(lokasi);
-
-                tableModel.setRowCount(0);
-                for (Stok s : daftarStok) {
-                    tableModel.addRow(new Object[]{s.getIdStok(), s.getJumlah(), s.getLokasi()});
-                }
-                ids.setText("");
+                refreshTable();
+                ids.setText(""); // Kosongkan field ID setelah edit/hapus
                 jumlahs.setText("");
                 lokasis.setText("");
                 jTable1.clearSelection();
@@ -137,12 +123,10 @@ public class StokGUI extends javax.swing.JPanel {
                     JOptionPane.YES_NO_OPTION
                 );
                 if (confirm == JOptionPane.YES_OPTION) {
-                    daftarStok.remove(selectedRow);
-                    tableModel.setRowCount(0);
-                    for (Stok s : daftarStok) {
-                        tableModel.addRow(new Object[]{s.getIdStok(), s.getJumlah(), s.getLokasi()});
-                    }
-                    ids.setText("");
+                    Stok stok = paper.model.Stok.getStokList().get(selectedRow);
+                    paper.model.Stok.removeStok(stok);
+                    refreshTable();
+                    ids.setText(""); // Kosongkan field ID setelah edit/hapus
                     jumlahs.setText("");
                     lokasis.setText("");
                     jTable1.clearSelection();
@@ -154,7 +138,7 @@ public class StokGUI extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int selectedRow = jTable1.getSelectedRow();
                 if (selectedRow >= 0) {
-                    Stok stok = daftarStok.get(selectedRow);
+                    Stok stok = paper.model.Stok.getStokList().get(selectedRow);
                     ids.setText(stok.getIdStok());
                     jumlahs.setText(String.valueOf(stok.getJumlah()));
                     lokasis.setText(stok.getLokasi());
@@ -165,7 +149,7 @@ public class StokGUI extends javax.swing.JPanel {
 
     private void refreshTable() {
         tableModel.setRowCount(0);
-        for (Stok s : daftarStok) {
+        for (Stok s : paper.model.Stok.getStokList()) {
             tableModel.addRow(new Object[]{
                 s.getIdStok(), s.getJumlah(), s.getLokasi()
             });
@@ -197,6 +181,8 @@ public class StokGUI extends javax.swing.JPanel {
 
         jLabel4.setText("LOKASI");
 
+        ids.setEditable(false);
+
         jdelete.setText("delete");
 
         jedit.setText("edit");
@@ -204,9 +190,14 @@ public class StokGUI extends javax.swing.JPanel {
         jsubmit.setText("submit");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {},
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
             new String [] {
-                "ID", "Jumlah", "Lokasi"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

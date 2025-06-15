@@ -14,12 +14,13 @@ import paper.model.PaperNetwork;
  * @author Deva
  */
 public class PaperNetworkGUI extends javax.swing.JPanel {
-    public static List<PaperNetwork> dataNet = new ArrayList<>();
+    public static List<PaperNetwork> dataNet = paper.model.PaperNetwork.dataPaperNetwork;
     /**
      * Creates new form PaperNetwork
      */
     public PaperNetworkGUI() {
         initComponents();
+        refreshTable(); // Tambahkan ini agar data selalu muncul
     }
 
     /**
@@ -211,27 +212,36 @@ public class PaperNetworkGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jenispActionPerformed
 
+    // Tambahkan method berikut di kelas PaperNetworkGUI
+    private void refreshTable() {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (PaperNetwork pn : dataNet) {
+            String status = pn.isStatusValidasi() ? "Valid" : "Tidak Valid";
+            model.addRow(new Object[]{pn.getIdPaper(), pn.getJenisPaper(), status});
+        }
+    }
+
     private void jEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditActionPerformed
     int selectedRow = jTable1.getSelectedRow();
-    
+
     if (selectedRow == -1) {
         JOptionPane.showMessageDialog(this, "Pilih baris yang ingin diupdate.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
-    
+
     // Ambil data baru dari form
     String jenisBaru = jenisp.getText();
     boolean statusBaru = cbValid.isSelected();
-    String statusTabel = statusBaru ? "Valid" : "Tidak Valid";
 
-    // Update data di tabel (tampilan)
-    jTable1.setValueAt(jenisBaru, selectedRow, 1);
-    jTable1.setValueAt(statusTabel, selectedRow, 2);
-    
+    // Update data di list
     String idLama = dataNet.get(selectedRow).getIdPaper();
     PaperNetwork paperBaru = new PaperNetwork(idLama, jenisBaru, statusBaru);
-
     dataNet.set(selectedRow, paperBaru);
+
+    // Refresh table agar data tampil
+    refreshTable();
+
     JOptionPane.showMessageDialog(this, "Data berhasil diupdate.");
     }//GEN-LAST:event_jEditActionPerformed
 
@@ -273,14 +283,22 @@ public class PaperNetworkGUI extends javax.swing.JPanel {
 
     private void jsbumitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsbumitActionPerformed
         // 1. Ambil data dari komponen form menggunakan nama variabel yang benar
-        String idPaper = String.valueOf((int)(Math.random() * 1000000));
+        // Generate random alphanumeric ID, length 6
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder sb = new StringBuilder();
+        java.util.Random rand = new java.util.Random();
+        for (int i = 0; i < 6; i++) {
+            sb.append(chars.charAt(rand.nextInt(chars.length())));
+        }
+        String idPaper = sb.toString();
+
         String jenisPaper = jenisp.getText();
         boolean isValid = cbValid.isSelected();
 
         // 2. Lakukan validasi input
-        if (idPaper.isEmpty() || jenisPaper.isEmpty()) {
+        if (jenisPaper.isEmpty()) {
             // Tampilkan pesan error jika ada yang kosong
-            javax.swing.JOptionPane.showMessageDialog(this, "ID dan Jenis Paper Network wajib diisi!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Jenis Paper Network wajib diisi!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         } else {
             // Jika semua terisi, lanjutkan proses
 
@@ -290,10 +308,8 @@ public class PaperNetworkGUI extends javax.swing.JPanel {
             // 4. Tambahkan objek baru ke ArrayList (dataNet)
             dataNet.add(paperBaru);
 
-            // 5. Tambahkan baris baru ke JTable (jTable1)
-            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jTable1.getModel();
-            String statusUntukTabel = isValid ? "Valid" : "Tidak Valid";
-            model.addRow(new Object[]{idPaper, jenisPaper, statusUntukTabel});
+            // 5. Refresh table agar data tampil
+            refreshTable();
 
             // 6. Kosongkan kembali form input untuk data selanjutnya
             idp.setText("");

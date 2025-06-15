@@ -4,6 +4,7 @@
  */
 package paper.GUI;
 
+import javax.swing.JDialog;
 import paper.auth.User;
 
 /**
@@ -12,15 +13,24 @@ import paper.auth.User;
  */
 public class UserGUI extends javax.swing.JPanel {
     private NewJFrame parent;
+    private JDialog dialogParent;
 
     public UserGUI(NewJFrame parent) {
         this.parent = parent;
+        this.dialogParent = null;
+        initComponents();
+    }
+
+    // Untuk dialog/modal
+    public UserGUI(JDialog dialogParent) {
+        this.parent = null;
+        this.dialogParent = dialogParent;
         initComponents();
     }
 
     // Untuk testing mandiri
     public UserGUI() {
-        this(null);
+        this((NewJFrame) null);
     }
 
     /**
@@ -146,7 +156,11 @@ public class UserGUI extends javax.swing.JPanel {
             jusername.setText("");
             jemail.setText("");
             jpassword.setText("");
-            // Setelah registrasi, kembali ke LoginGUI
+            // Setelah registrasi, tutup dialog/modal jika ada
+            if (dialogParent != null) {
+                dialogParent.dispose();
+            }
+            // Jika dipanggil dari NewJFrame, kembali ke LoginGUI
             if (parent != null) {
                 parent.showPanel(new LoginGUI(parent));
             }
@@ -156,7 +170,11 @@ public class UserGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jsubmitActionPerformed
 
     private void jpunyaaakunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpunyaaakunActionPerformed
-        // Kembali ke LoginGUI
+        // Tutup dialog/modal jika ada
+        if (dialogParent != null) {
+            dialogParent.dispose();
+        }
+        // Jika dipanggil dari NewJFrame, kembali ke LoginGUI
         if (parent != null) {
             parent.showPanel(new LoginGUI(parent));
         }

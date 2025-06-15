@@ -56,4 +56,12 @@ public class InvoicePenjualan extends DokumenTransaksi{
         System.out.println("Total          : " + total);
         System.out.println("Status         : " + status);
     }
+    
+    public static final java.util.List<InvoicePenjualan> dataInvoicePenjualan = new java.util.ArrayList<>();
+
+    static {
+        dataInvoicePenjualan.add(new InvoicePenjualan("IVJ001", new java.util.Date(), 120000, "Lunas", "OP001", new java.util.Date()));
+        dataInvoicePenjualan.add(new InvoicePenjualan("IVJ002", new java.util.Date(), 35000, "Belum Lunas", "OP002", new java.util.Date()));
+        dataInvoicePenjualan.add(new InvoicePenjualan("IVJ003", new java.util.Date(), 10000, "Lunas", "OP003", new java.util.Date()));
+    }
 }

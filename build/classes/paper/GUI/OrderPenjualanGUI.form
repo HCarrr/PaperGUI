@@ -39,9 +39,9 @@
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="dropproduk" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
-                          <Component id="dopmitra" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="dropproduk" pref="142" max="32767" attributes="0"/>
+                          <Component id="kodepenjualan" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -59,10 +59,10 @@
                   <Component id="dropproduk" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="dopmitra" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="kodepenjualan" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -70,7 +70,7 @@
                   <Component id="jedit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jdelete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="132" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -82,18 +82,6 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
             <StringItem index="0" value="produk"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="dopmitra">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
-            <StringItem index="0" value="mitra"/>
           </StringArray>
         </Property>
       </Properties>
@@ -126,7 +114,7 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="0">
                 <Column editable="true" title="Daftar Produk" type="java.lang.Object"/>
-                <Column editable="true" title="Mitra" type="java.lang.Object"/>
+                <Column editable="true" title="Kode penjualan" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -155,7 +143,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mitra"/>
+        <Property name="text" type="java.lang.String" value="Kode penjualan"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jsubmit">
@@ -181,6 +169,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jdeleteActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="kodepenjualan">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

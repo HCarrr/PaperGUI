@@ -4,19 +4,18 @@
  */
 package paper.GUI;
 
-import paper.model.Mitra;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import paper.model.OrderPenjualan;
 import paper.model.Produk;
+import javax.swing.JOptionPane;
+import paper.util.AppUtils;
 
 /**
  *
  * @author Deva
  */
 public class OrderPenjualanGUI extends javax.swing.JPanel {
-    private ArrayList<Produk> daftarProduk = new ArrayList<>();
-    private ArrayList<Mitra> daftarMitra = new ArrayList<>();
+    // Gunakan referensi langsung ke static list Produk
+    private java.util.List<Produk> daftarProduk = paper.model.Produk.DATA_SAMPLE;
     private OrderPenjualan currentOrder;
 
     // Tambahkan di atas konstruktor
@@ -26,30 +25,32 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
     public OrderPenjualanGUI() {
         initComponents();
 
-        // Ambil data statis dari model
-        daftarProduk.clear();
-        daftarProduk.addAll(paper.model.Produk.DATA_SAMPLE);
-
-        daftarMitra.clear();
-//        daftarMitra.addAll(paper.model.Mitra.dataMitra);
-
         // Isi dropproduk hanya dengan nama produk
         dropproduk.removeAllItems();
         for (Produk p : daftarProduk) {
             dropproduk.addItem(p.getNama());
         }
 
-        // Isi dopmitra hanya dengan nama mitra
-        dopmitra.removeAllItems();
-        for (Mitra m : daftarMitra) {
-            dopmitra.addItem(m.getNama());
-        }
+        kodepenjualan.setEditable(false);
 
-        // Set model tabel
         tableModel = new javax.swing.table.DefaultTableModel(
-            new Object[]{"Produk", "Mitra"}, 0
+            new Object[]{"Produk", "Kode Penjualan"}, 0
         );
         jTable1.setModel(tableModel);
+
+        refreshTable(); // Tambahkan ini agar data selalu muncul setiap panel dibuka
+    }
+
+    private void refreshTable() {
+        tableModel.setRowCount(0);
+        // Ambil data dari static list model
+        for (OrderPenjualan order : paper.model.OrderPenjualan.dataOrderPenjualan) {
+            for (var entry : order.getDaftarProdukDijual().entrySet()) {
+                tableModel.addRow(new Object[]{
+                    entry.getKey().getNama(), order.getIdTransaksi()
+                });
+            }
+        }
     }
 
     /**
@@ -62,7 +63,6 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
     private void initComponents() {
 
         dropproduk = new javax.swing.JComboBox<>();
-        dopmitra = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -71,10 +71,9 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
         jsubmit = new javax.swing.JButton();
         jedit = new javax.swing.JButton();
         jdelete = new javax.swing.JButton();
+        kodepenjualan = new javax.swing.JTextField();
 
         dropproduk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "produk" }));
-
-        dopmitra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "mitra" }));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("ORDER PENJUALAN");
@@ -86,7 +85,7 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Daftar Produk", "Mitra"
+                "Daftar Produk", "Kode penjualan"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,7 +95,7 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel3.setText("Mitra");
+        jLabel3.setText("Kode penjualan");
 
         jsubmit.setText("submit");
         jsubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +117,8 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
                 jdeleteActionPerformed(evt);
             }
         });
+
+        kodepenjualan.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -143,9 +144,9 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dropproduk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dopmitra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dropproduk, 0, 142, Short.MAX_VALUE)
+                            .addComponent(kodepenjualan))))
                 .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
@@ -157,54 +158,55 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dropproduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dopmitra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(kodepenjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jsubmit)
                     .addComponent(jedit)
                     .addComponent(jdelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private String generateKodePenjualan() {
+        return AppUtils.generateKode("ORD");
+    }
+
     private void jsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsubmitActionPerformed
         int idxProduk = dropproduk.getSelectedIndex();
-        int idxMitra = dopmitra.getSelectedIndex();
 
-        if (idxProduk < 0 || idxMitra < 0) {
-            JOptionPane.showMessageDialog(this, "Pilih produk dan mitra!", "Error", JOptionPane.ERROR_MESSAGE);
+        if (idxProduk < 0) {
+            JOptionPane.showMessageDialog(this, "Pilih produk!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         Produk produkDipilih = daftarProduk.get(idxProduk);
-        Mitra mitraDipilih = daftarMitra.get(idxMitra);
 
-        if (currentOrder == null || !currentOrder.getPelanggan().equals(mitraDipilih)) {
-            currentOrder = new OrderPenjualan("ORD" + System.currentTimeMillis(), new java.util.Date(), 0.0, mitraDipilih);
-        }
+        // Selalu generate kode baru setiap submit
+        String kode = generateKodePenjualan();
+        kodepenjualan.setText(kode);
+        currentOrder = new OrderPenjualan(kode, new java.util.Date(), 0.0, null);
+        paper.model.OrderPenjualan.dataOrderPenjualan.add(currentOrder);
 
-        currentOrder.tambahProduk(produkDipilih, 1); // Tambah 1 sebagai default
-        tableModel.addRow(new Object[]{produkDipilih.getNama(), mitraDipilih.getNama()});
+        currentOrder.tambahProduk(produkDipilih, 1);
+        refreshTable(); // Refresh tabel agar data baru langsung muncul
         jTable1.clearSelection();
+        currentOrder = null;
     }//GEN-LAST:event_jsubmitActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow >= 0) {
-            // Ambil nama produk dan mitra dari tabel
+            // Ambil nama produk dari tabel
             String namaProduk = (String) tableModel.getValueAt(selectedRow, 0);
-            String namaMitra = (String) tableModel.getValueAt(selectedRow, 1);
-
-            // Pilih item di combo box sesuai nama
             dropproduk.setSelectedItem(namaProduk);
-            dopmitra.setSelectedItem(namaMitra);
+            // kodepenjualan sudah readonly, tidak perlu diubah
         }
     }//GEN-LAST:event_jTable1MouseClicked
-
 
     private void jeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeditActionPerformed
         int selectedRow = jTable1.getSelectedRow();
@@ -213,17 +215,15 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
             return;
         }
         int idxProduk = dropproduk.getSelectedIndex();
-        int idxMitra = dopmitra.getSelectedIndex();
-        if (idxProduk < 0 || idxMitra < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Pilih produk dan mitra!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        if (idxProduk < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Pilih produk!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
         String namaProduk = daftarProduk.get(idxProduk).getNama();
-        String namaMitra = daftarMitra.get(idxMitra).getNama();
 
         // Update data di tabel
         tableModel.setValueAt(namaProduk, selectedRow, 0);
-        tableModel.setValueAt(namaMitra, selectedRow, 1);
+        // kode penjualan tidak diedit (readonly)
         jTable1.clearSelection();
     }//GEN-LAST:event_jeditActionPerformed
 
@@ -247,7 +247,6 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> dopmitra;
     private javax.swing.JComboBox<String> dropproduk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -257,6 +256,7 @@ public class OrderPenjualanGUI extends javax.swing.JPanel {
     private javax.swing.JButton jdelete;
     private javax.swing.JButton jedit;
     private javax.swing.JButton jsubmit;
+    private javax.swing.JTextField kodepenjualan;
     // End of variables declaration//GEN-END:variables
 
     public static void main(String[] args) {

@@ -4,6 +4,8 @@
  */
 package paper.GUI;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import paper.auth.User;
 
 /**
@@ -11,19 +13,37 @@ import paper.auth.User;
  * @author Deva
  */
 public class LoginGUI extends javax.swing.JPanel {
-    private NewJFrame parent;
+    private JFrame parentFrame;
+    private LoginCallback callback;
+
+    public interface LoginCallback {
+        void onLoginSuccess(String username);
+    }
 
     /**
      * Creates new form Login
      */
-    public LoginGUI(NewJFrame parent) {
-        this.parent = parent;
+    public LoginGUI(JFrame parentFrame, LoginCallback callback) {
+        this.parentFrame = parentFrame;
+        this.callback = callback;
         initComponents();
     }
 
     // Untuk testing mandiri
     public LoginGUI() {
-        this(null);
+        this(null, null);
+    }
+
+    // Konstruktor untuk NewJFrame (main frame)
+    public LoginGUI(NewJFrame parentFrame) {
+        this.parentFrame = parentFrame;
+        this.callback = username -> {
+            // Setelah login sukses, update NewJFrame
+            if (parentFrame != null) {
+                parentFrame.showPanel(new Dashboard(username));
+            }
+        };
+        initComponents();
     }
 
     /**
@@ -133,9 +153,13 @@ public class LoginGUI extends javax.swing.JPanel {
         User user = User.authenticate(username, password);
         if (user != null) {
             javax.swing.JOptionPane.showMessageDialog(this, "Login berhasil!\nSelamat datang, " + user.getUsername(), "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            // Ganti panel ke Dashboard lewat parent
-            if (parent != null) {
-                parent.onLoginSuccess(user.getUsername());
+            // Panggil callback untuk login sukses
+            if (callback != null) {
+                callback.onLoginSuccess(user.getUsername());
+            }
+            // Tutup window login jika ini dialog/modal, bukan main frame
+            if (parentFrame != null && !(parentFrame instanceof NewJFrame)) {
+                parentFrame.dispose();
             }
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Login gagal! Username tidak ditemukan atau password salah.", "Gagal", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -143,10 +167,12 @@ public class LoginGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jloginActionPerformed
 
     private void jregisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jregisActionPerformed
-        // Pindah ke UserGUI (form registrasi user)
-        if (parent != null) {
-            parent.showPanel(new UserGUI(parent));
-        }
+        // Tampilkan UserGUI sebagai dialog/modal
+        JDialog dialog = new JDialog(parentFrame, "Registrasi User", true);
+        dialog.setContentPane(new UserGUI(dialog));
+        dialog.pack();
+        dialog.setLocationRelativeTo(parentFrame);
+        dialog.setVisible(true);
     }//GEN-LAST:event_jregisActionPerformed
 
     private void jusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jusernameActionPerformed
@@ -166,9 +192,13 @@ public class LoginGUI extends javax.swing.JPanel {
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(() -> {
-            javax.swing.JFrame frame = new javax.swing.JFrame("Login User");
+            JFrame frame = new JFrame("Login User");
             frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-            frame.setContentPane(new LoginGUI());
+            frame.setContentPane(new LoginGUI(frame, username -> {
+                // Setelah login sukses, buka dashboard
+                NewJFrame dashboard = new NewJFrame(username);
+                dashboard.setVisible(true);
+            }));
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);

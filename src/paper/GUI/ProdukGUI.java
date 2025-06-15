@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package paper.GUI;
 
-import java.util.ArrayList;
 import paper.model.Produk;
 
 public class ProdukGUI extends javax.swing.JPanel {
-    private ArrayList<Produk> daftarProduk = new ArrayList<>();
+    // private java.util.List<Produk> daftarProduk = paper.model.Produk.DATA_SAMPLE;
+    // Ganti dengan akses langsung ke Produk.getProdukList()
     private javax.swing.table.DefaultTableModel tableModel;
 
     public ProdukGUI() {
@@ -19,15 +15,18 @@ public class ProdukGUI extends javax.swing.JPanel {
         jTable1.setModel(tableModel);
         refreshTable();
 
+        jid.setEditable(false);
+        jid.setText("");
+
         jsubmit.addActionListener((java.awt.event.ActionEvent evt) -> {
             // SUBMIT
-            String id = jid.getText().trim();
+            // String id = jid.getText().trim(); // Tidak perlu ambil ID dari input
             String nama = jnama.getText().trim();
             String hargaJualStr = jjual.getText().trim();
             String hargaBeliStr = jbeli.getText().trim();
             String deskripsi = jdesk.getText().trim();
-            if (id.isEmpty() || nama.isEmpty() || hargaJualStr.isEmpty() || hargaBeliStr.isEmpty() || deskripsi.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(ProdukGUI.this, "Semua field wajib diisi!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            if (nama.isEmpty() || hargaJualStr.isEmpty() || hargaBeliStr.isEmpty() || deskripsi.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(ProdukGUI.this, "Semua field wajib diisi (kecuali ID)!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
             double hargaJual = 0, hargaBeli = 0;
@@ -89,122 +88,102 @@ public class ProdukGUI extends javax.swing.JPanel {
                 );
                 return;
             }
-            for (Produk p : daftarProduk) {
-                if (p.getIdProduk().equals(id)) {
-                    javax.swing.JOptionPane.showMessageDialog(ProdukGUI.this, "ID produk sudah ada!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            }
-            daftarProduk.add(new Produk(id, nama, hargaJual, hargaBeli, deskripsi));
+            // Tidak perlu cek duplikasi ID karena ID auto-generated
+            paper.model.Produk.addProduk(new Produk(nama, hargaJual, hargaBeli, deskripsi));
             refreshTable();
-            jid.setText("");
+            jid.setText(""); // Kosongkan field ID setelah tambah
             jnama.setText("");
             jjual.setText("");
             jbeli.setText("");
             jdesk.setText("");
         });
 
-        jedit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // EDIT
-                int selectedRow = jTable1.getSelectedRow();
-                if (selectedRow < 0) {
-                    javax.swing.JOptionPane.showMessageDialog(ProdukGUI.this, "Pilih baris yang ingin diedit di tabel!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                String id = jid.getText().trim();
-                String nama = jnama.getText().trim();
-                String hargaJualStr = jjual.getText().trim();
-                String hargaBeliStr = jbeli.getText().trim();
-                String deskripsi = jdesk.getText().trim();
-
-                if (id.isEmpty() || nama.isEmpty() || hargaJualStr.isEmpty() || hargaBeliStr.isEmpty() || deskripsi.isEmpty()) {
-                    javax.swing.JOptionPane.showMessageDialog(ProdukGUI.this, "Semua field wajib diisi!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                double hargaJual = 0, hargaBeli = 0;
-                boolean hargaJualValid = true, hargaBeliValid = true;
-
-                try {
-                    hargaJual = Double.parseDouble(hargaJualStr);
-                    if (hargaJual < 0) {
-                        javax.swing.JOptionPane.showMessageDialog(
+        jedit.addActionListener((java.awt.event.ActionEvent evt) -> {
+            // EDIT
+            int selectedRow = jTable1.getSelectedRow();
+            if (selectedRow < 0) {
+                javax.swing.JOptionPane.showMessageDialog(ProdukGUI.this, "Pilih baris yang ingin diedit di tabel!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // String id = jid.getText().trim(); // ID tidak boleh diedit
+            String nama = jnama.getText().trim();
+            String hargaJualStr = jjual.getText().trim();
+            String hargaBeliStr = jbeli.getText().trim();
+            String deskripsi = jdesk.getText().trim();
+            if (nama.isEmpty() || hargaJualStr.isEmpty() || hargaBeliStr.isEmpty() || deskripsi.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(ProdukGUI.this, "Semua field wajib diisi (kecuali ID)!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            double hargaJual = 0, hargaBeli = 0;
+            boolean hargaJualValid = true, hargaBeliValid = true;
+            try {
+                hargaJual = Double.parseDouble(hargaJualStr);
+                if (hargaJual < 0) {
+                    javax.swing.JOptionPane.showMessageDialog(
                             ProdukGUI.this,
                             "Harga Jual tidak boleh negatif!\nSilakan masukkan angka 0 atau lebih.",
                             "Input Harga Jual Tidak Valid",
                             javax.swing.JOptionPane.WARNING_MESSAGE
-                        );
-                        return;
-                    }
-                } catch (NumberFormatException e) {
-                    hargaJualValid = false;
+                    );
+                    return;
                 }
-
-                try {
-                    hargaBeli = Double.parseDouble(hargaBeliStr);
-                    if (hargaBeli < 0) {
-                        javax.swing.JOptionPane.showMessageDialog(
+            } catch (NumberFormatException e) {
+                hargaJualValid = false;
+            }
+            try {
+                hargaBeli = Double.parseDouble(hargaBeliStr);
+                if (hargaBeli < 0) {
+                    javax.swing.JOptionPane.showMessageDialog(
                             ProdukGUI.this,
                             "Harga Beli tidak boleh negatif!\nSilakan masukkan angka 0 atau lebih.",
                             "Input Harga Beli Tidak Valid",
                             javax.swing.JOptionPane.WARNING_MESSAGE
-                        );
-                        return;
-                    }
-                } catch (NumberFormatException e) {
-                    hargaBeliValid = false;
+                    );
+                    return;
                 }
-
-                // Alert jika salah satu atau kedua harga tidak valid
-                if (!hargaJualValid && !hargaBeliValid) {
-                    javax.swing.JOptionPane.showMessageDialog(
+            } catch (NumberFormatException e) {
+                hargaBeliValid = false;
+            }
+            // Alert jika salah satu atau kedua harga tidak valid
+            if (!hargaJualValid && !hargaBeliValid) {
+                javax.swing.JOptionPane.showMessageDialog(
                         ProdukGUI.this,
                         "Harga Jual dan Harga Beli harus berupa angka.\nContoh: 10000 atau 15000.50",
                         "Format Harga Salah",
                         javax.swing.JOptionPane.WARNING_MESSAGE
-                    );
-                    return;
-                } else if (!hargaJualValid) {
-                    javax.swing.JOptionPane.showMessageDialog(
+                );
+                return;
+            } else if (!hargaJualValid) {
+                javax.swing.JOptionPane.showMessageDialog(
                         ProdukGUI.this,
                         "Harga Jual harus berupa angka.\nContoh: 10000 atau 15000.50",
                         "Format Harga Jual Salah",
                         javax.swing.JOptionPane.WARNING_MESSAGE
-                    );
-                    return;
-                } else if (!hargaBeliValid) {
-                    javax.swing.JOptionPane.showMessageDialog(
+                );
+                return;
+            } else if (!hargaBeliValid) {
+                javax.swing.JOptionPane.showMessageDialog(
                         ProdukGUI.this,
                         "Harga Beli harus berupa angka.\nContoh: 10000 atau 15000.50",
                         "Format Harga Beli Salah",
                         javax.swing.JOptionPane.WARNING_MESSAGE
-                    );
-                    return;
-                }
-
-                for (int i = 0; i < daftarProduk.size(); i++) {
-                    if (i != selectedRow && daftarProduk.get(i).getIdProduk().equals(id)) {
-                        javax.swing.JOptionPane.showMessageDialog(ProdukGUI.this, "ID produk sudah ada di baris lain!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                }
-
-                Produk produk = daftarProduk.get(selectedRow);
-                produk.setIdProduk(id);
-                produk.setNama(nama);
-                produk.setHargaJual(hargaJual);
-                produk.setHargaBeli(hargaBeli);
-                produk.setDeskripsi(deskripsi);
-
-                refreshTable();
-                jid.setText("");
-                jnama.setText("");
-                jjual.setText("");
-                jbeli.setText("");
-                jdesk.setText("");
-                jTable1.clearSelection();
+                );
+                return;
             }
+            // Tidak perlu cek duplikasi ID
+            Produk produk = paper.model.Produk.getProdukList().get(selectedRow);
+            // produk.setIdProduk(id); // Jangan ubah ID
+            produk.setNama(nama);
+            produk.setHargaJual(hargaJual);
+            produk.setHargaBeli(hargaBeli);
+            produk.setDeskripsi(deskripsi);
+            refreshTable();
+            jid.setText(""); // Kosongkan field ID setelah edit/hapus
+            jnama.setText("");
+            jjual.setText("");
+            jbeli.setText("");
+            jdesk.setText("");
+            jTable1.clearSelection();
         });
 
         jdelete.addActionListener(new java.awt.event.ActionListener() {
@@ -222,9 +201,10 @@ public class ProdukGUI extends javax.swing.JPanel {
                     javax.swing.JOptionPane.YES_NO_OPTION
                 );
                 if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-                    daftarProduk.remove(selectedRow);
+                    Produk produk = paper.model.Produk.getProdukList().get(selectedRow);
+                    paper.model.Produk.removeProduk(produk);
                     refreshTable();
-                    jid.setText("");
+                    jid.setText(""); // Kosongkan field ID setelah edit/hapus
                     jnama.setText("");
                     jjual.setText("");
                     jbeli.setText("");
@@ -238,7 +218,7 @@ public class ProdukGUI extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int selectedRow = jTable1.getSelectedRow();
                 if (selectedRow >= 0) {
-                    Produk produk = daftarProduk.get(selectedRow);
+                    Produk produk = paper.model.Produk.getProdukList().get(selectedRow);
                     jid.setText(produk.getIdProduk());
                     jnama.setText(produk.getNama());
                     jjual.setText(String.valueOf(produk.getHargaJual()));
@@ -251,7 +231,7 @@ public class ProdukGUI extends javax.swing.JPanel {
 
     private void refreshTable() {
         tableModel.setRowCount(0);
-        for (Produk p : daftarProduk) {
+        for (Produk p : paper.model.Produk.getProdukList()) {
             tableModel.addRow(new Object[]{
                 p.getIdProduk(), p.getNama(), p.getHargaJual(), p.getHargaBeli(), p.getDeskripsi()
             });

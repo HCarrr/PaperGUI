@@ -56,4 +56,12 @@ public class InvoicePembelian extends DokumenTransaksi {
         System.out.println("Total          : " + total);
         System.out.println("Status         : " + status);
     }
+    
+    public static final java.util.List<InvoicePembelian> dataInvoicePembelian = new java.util.ArrayList<>();
+
+    static {
+        dataInvoicePembelian.add(new InvoicePembelian("IPB001", new java.util.Date(), 100000, "Lunas", "OP001", new java.util.Date()));
+        dataInvoicePembelian.add(new InvoicePembelian("IPB002", new java.util.Date(), 50000, "Belum Lunas", "OP002", new java.util.Date()));
+        dataInvoicePembelian.add(new InvoicePembelian("IPB003", new java.util.Date(), 20000, "Lunas", "OP003", new java.util.Date()));
+    }
 }

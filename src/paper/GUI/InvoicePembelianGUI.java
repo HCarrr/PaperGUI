@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import paper.model.InvoicePembelian;
+import paper.util.AppUtils;
 
 /**
  *
@@ -175,7 +176,7 @@ public class InvoicePembelianGUI extends javax.swing.JFrame {
         listInvoice.add(invoice);
 
         DefaultTableModel model = (DefaultTableModel) tbOrderan.getModel();
-        model.addRow(new Object[]{order, sdf.format(jatuhTempo)});
+        model.addRow(new Object[]{order, AppUtils.formatTanggal(jatuhTempo)});
 
         JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnTambahActionPerformed

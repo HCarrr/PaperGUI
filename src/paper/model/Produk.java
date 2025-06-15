@@ -1,8 +1,9 @@
 // Produk.java
 package paper.model;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import paper.util.AppUtils;
 
 public class Produk {
     private String idProduk;
@@ -11,6 +12,21 @@ public class Produk {
     private double hargaBeli;
     private String deskripsi;
 
+    private static int COUNTER = 1; // Untuk auto-generate ID
+
+    private static String generateId() {
+        return AppUtils.generateRandomId();
+    }
+
+    public Produk(String nama, double hargaJual, double hargaBeli, String deskripsi) {
+        this.idProduk = generateId();
+        this.nama = nama;
+        this.hargaJual = hargaJual;
+        this.hargaBeli = hargaBeli;
+        this.deskripsi = deskripsi;
+    }
+
+    // Konstruktor lama (dengan id manual) tetap ada untuk kebutuhan data sample, tapi sebaiknya tidak dipakai di GUI
     public Produk(String idProduk, String nama, double hargaJual, double hargaBeli, String deskripsi) {
         this.idProduk = idProduk;
         this.nama = nama;
@@ -66,9 +82,25 @@ public class Produk {
     // Data statis untuk kebutuhan GUI
     public static final List<Produk> DATA_SAMPLE = new ArrayList<>();
 
+    // Getter untuk akses global
+    public static java.util.List<Produk> getProdukList() {
+        return DATA_SAMPLE;
+    }
+
+    // Tambah produk ke list global
+    public static void addProduk(Produk produk) {
+        DATA_SAMPLE.add(produk);
+    }
+
+    // Hapus produk dari list global
+    public static void removeProduk(Produk produk) {
+        DATA_SAMPLE.remove(produk);
+    }
+
     static {
-        DATA_SAMPLE.add(new Produk("P001", "Kertas HVS A4", 50000, 40000, "Kertas HVS ukuran A4 70gsm"));
-        DATA_SAMPLE.add(new Produk("P002", "Pulpen Biru", 3500, 2000, "Pulpen tinta biru"));
-        DATA_SAMPLE.add(new Produk("P003", "Map Plastik", 2000, 1000, "Map plastik warna-warni"));
+        // Generate random IDs for sample data
+        DATA_SAMPLE.add(new Produk(generateId(), "Kertas HVS A4", 50000, 40000, "Kertas HVS ukuran A4 70gsm"));
+        DATA_SAMPLE.add(new Produk(generateId(), "Pulpen Biru", 3500, 2000, "Pulpen tinta biru"));
+        DATA_SAMPLE.add(new Produk(generateId(), "Map Plastik", 2000, 1000, "Map plastik warna-warni"));
     }
 }

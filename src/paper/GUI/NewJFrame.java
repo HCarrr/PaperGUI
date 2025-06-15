@@ -5,10 +5,7 @@
 package paper.GUI;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import paper.model.Produk;
-import paper.model.Mitra;
 
 /**
  *
@@ -16,8 +13,10 @@ import paper.model.Mitra;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
-    private JPanel contentPanel;
-    private JPanel homePanel;
+    private final JPanel contentPanel;
+    private final JPanel homePanel;
+    private boolean isLoggedIn = false;
+    private String username = "User";
 
     /**
      * Creates new form NewJFrame
@@ -40,6 +39,30 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jlogout.setVisible(false);
         showPanel(new LoginGUI(this));
+    }
+
+    // Konstruktor baru menerima username
+    public NewJFrame(String username) {
+        initComponents();
+        setTitle("Dashboard");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        contentPanel = new JPanel(new BorderLayout());
+        homePanel = new JPanel();
+        homePanel.setLayout(new GridBagLayout());
+        JLabel lblWelcome = new JLabel("Selamat Datang di Dashboard");
+        lblWelcome.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        homePanel.add(lblWelcome);
+
+        add(contentPanel, BorderLayout.CENTER);
+
+        jlogout.setVisible(true);
+        this.isLoggedIn = true;
+        this.username = username;
+        jlogin.setText("Dashboard");
+        showPanel(new Dashboard(username));
     }
 
     // Method untuk menampilkan panel di contentPanel
@@ -190,7 +213,8 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void jmitraActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        showPanel(new MitraForm());
+        // Tampilkan MitraForm di panel utama, bukan JFrame baru
+        showPanel(new MitraFormPanel());
     }
 
     private void jnetworkActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -201,12 +225,15 @@ public class NewJFrame extends javax.swing.JFrame {
         showPanel(new OrderPembelian());
     }
 
-    private void jpenjualanActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        showPanel(new OrderPenjualanGUI());
+    private void jlaporanguiActionPerformed(java.awt.event.ActionEvent evt) {
+        // Tampilkan ReportGeneratorGUI di panel utama
+        showPanel(new ReportGeneratorGUI());
     }
 
-    private boolean isLoggedIn = false;
-    private String username = "User";
+    private void jpenjualanActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // Tampilkan OrderPenjualanGUI di panel utama
+        showPanel(new OrderPenjualanGUI());
+    }
 
     private void jloginActionPerformed(java.awt.event.ActionEvent evt) {
         if (!isLoggedIn) {
@@ -220,14 +247,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
     // Method ini dipanggil dari LoginGUI setelah login sukses
     public void onLoginSuccess(String username) {
-        this.isLoggedIn = true;
-        this.username = username;
-        jlogin.setText("Dashboard");
-        jlogout.setVisible(true); // Tampilkan tombol logout setelah login
-        showPanel(new Dashboard(username));
+        // Tidak digunakan lagi, login sudah diatur dari LoginGUI
     }
 
-    private void jlogoutActionPerformed(java.awt.event.ActionEvent evt) {
+    public void jlogoutActionPerformed(java.awt.event.ActionEvent evt) {
         isLoggedIn = false;
         username = "User";
         jlogin.setText("Login");
@@ -238,13 +261,11 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new NewJFrame().setVisible(true);
-        }
-    });
-}
+    // public static void main(String[] args) {
+    //     java.awt.EventQueue.invokeLater(() -> {
+    //         new NewJFrame().setVisible(true);
+    //     });
+    // }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
